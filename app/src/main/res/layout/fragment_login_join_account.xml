@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:padding="36dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="6dp"
+        >
+
+        <TextView
+            android:id="@+id/prev_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="뒤로가기"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="2/2"/>
+
+        <TextView
+            android:id="@+id/join_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/disabled_color"
+            android:text=" 가입하기"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.4" />
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="연락처를 입력하세요"
+        android:textSize="28sp"
+        android:layout_marginBottom="48dp"
+        />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.1" />
+    <LinearLayout
+        android:id="@+id/sign_up_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+        <EditText
+            android:id="@+id/sign_up_account_id"
+            android:layout_width="match_parent"
+            android:layout_height="48sp"
+            android:layout_marginBottom="18dp"
+            android:hint="ex) 01011112222"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:digits="0123456789"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/sign_up_password"
+            android:layout_width="match_parent"
+            android:layout_height="48sp"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"
+            android:hint="비밀번호"
+            android:visibility="gone"
+            tools:ignore="TextFields"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp">
+        <EditText
+            android:id="@+id/sign_up_password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="48sp"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"
+            android:hint="비밀번호 확인"
+            android:visibility="gone"
+            tools:ignore="TextFields" />
+
+        <ImageView
+            android:id="@+id/password_check_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:src="@drawable/baseline_check_24"
+            />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

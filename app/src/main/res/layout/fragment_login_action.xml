@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:padding="36dp">
+
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_chevron_left_24"
+        android:background="?attr/selectableItemBackground"
+        android:layout_gravity="start"
+        android:layout_marginEnd="6dp"/>
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.5" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:layout_gravity="center"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="48dp"
+        />
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:inputType="number"
+        android:layout_marginBottom="16dp"
+        android:hint="ex) 01012345678" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:layout_marginBottom="36dp"
+        android:hint="비밀번호"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="확인"
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:background="@drawable/ripple_effect"
+        android:clickable="true"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="3" />
+
+</LinearLayout>
