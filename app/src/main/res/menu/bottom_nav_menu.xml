@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/fragment_home"
+        android:title="홈"
+        android:icon="@drawable/ic_home"
+        android:background="@android:color/transparent"
+        />
+    <item
+        android:id="@+id/fragment_field"
+        android:title="필드"
+        android:icon="@drawable/ic_place"
+        android:background="@android:color/transparent"
+       />
+    <item
+        android:id="@+id/fragment_competition"
+        android:title="대회"
+        android:icon="@drawable/ic_trophy"
+        android:background="@android:color/transparent"
+        />
+    <item
+        android:id="@+id/fragment_user"
+        android:title="사용자"
+        android:icon="@drawable/ic_user"
+        android:background="@android:color/transparent"
+       />
+
+</menu>
