@@ -3,16 +3,18 @@
     android:id="@+id/user_fragment"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="10dp"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.user.UserFragment">
 
     <!-- 상단 영역: 좌우 배치 -->
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="124dp"
         android:paddingBottom="15dp"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -49,17 +51,52 @@
             android:textColor="@color/dee_gray"
             android:textStyle="bold" />
 
-
     </LinearLayout>
 
-    <!-- 중단 영역 -->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="@color/gray"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginBottom="16dp" />-->
+
+    <!--최근활동-->
     <TextView
-        android:id="@+id/center_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="유저 프래그먼트"
-        android:textSize="18sp"
-        android:textColor="@android:color/black" />
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="최근활동"/>
+
+    <FrameLayout
+        android:id="@+id/recent_fragment_container"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_background"
+        android:layout_height="80dp" />
+
+
+    <!--개인정보 관리-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="개인정보 관리"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragment_menu"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
