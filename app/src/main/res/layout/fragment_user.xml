@@ -1,17 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/user_fragment"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="10dp"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.user.UserFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- 상단 영역: 좌우 배치 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:paddingBottom="15dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_profile" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="username"
+            android:layout_gravity="bottom"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/dee_gray" />
+
+        <android.widget.Button
+            android:id="@+id/log_out_btn"
+            android:layout_width="80dp"
+            android:padding="0dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="3dp"
+            android:layout_gravity="bottom"
+            android:text="로그아웃"
+            android:textSize="12sp"
+            android:background="@drawable/logout_button_background"
+            android:textColor="@color/dee_gray"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <!-- 중단 영역 -->
     <TextView
         android:id="@+id/center_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="유저 프래그먼트"
         android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:gravity="center" />
-</FrameLayout>
+        android:textColor="@android:color/black" />
+
+</LinearLayout>

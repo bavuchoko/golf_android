@@ -1,11 +1,12 @@
 package com.bavuchoko.jsparkgolf.ui
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
+import com.auth0.android.jwt.JWT
 import com.bavuchoko.jsparkgolf.R
 import com.bavuchoko.jsparkgolf.ui.competition.CompetitionFragment
 import com.bavuchoko.jsparkgolf.ui.field.FieldFragment
@@ -81,6 +82,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         AuthUtils.checkLoginStatus(this)
+        val sharedPref = getSharedPreferences("golfPreferences", Context.MODE_PRIVATE)
+        val jwtToken = sharedPref.getString("accessToken", null)
+
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -89,5 +93,7 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.content_container, fragment)
         transaction.commit()
     }
+
+
 }
 

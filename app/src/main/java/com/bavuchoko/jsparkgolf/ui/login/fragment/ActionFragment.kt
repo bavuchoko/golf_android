@@ -12,14 +12,17 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bavuchoko.jsparkgolf.R
+import com.bavuchoko.jsparkgolf.common.CommonMethod
 import com.bavuchoko.jsparkgolf.network.RetrofitFactory
 import com.bavuchoko.jsparkgolf.repository.UserRepository
 import com.bavuchoko.jsparkgolf.ui.MainActivity
+import com.bavuchoko.jsparkgolf.ui.login.LoginActivity
 import com.bavuchoko.jsparkgolf.viewmodel.UserViewModel
 import com.bavuchoko.jsparkgolf.viewmodel.factory.UserViewModelFactory
 
 class ActionFragment : Fragment() {
 
+    lateinit var loginActivity: LoginActivity
     lateinit var usernameEditText: EditText
     lateinit var passwordEditText: EditText
     lateinit var loginButton: TextView
@@ -29,6 +32,7 @@ class ActionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        loginActivity = context as LoginActivity
         val view = inflater.inflate(R.layout.fragment_login_action, container, false)
         view.setBackgroundColor(resources.getColor(R.color.white))
 
@@ -57,10 +61,8 @@ class ActionFragment : Fragment() {
 
         userViewModel.jwtToken.observe(viewLifecycleOwner) { token ->
             if (token != null) {
-                val sharedPref = activity?.getSharedPreferences("golfPreferences", Context.MODE_PRIVATE)
-                val editor = sharedPref?.edit()
-                editor?.putString("accessToken", token)
-                editor?.apply()
+
+                CommonMethod.saveAccessToken(loginActivity, token)
 
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
