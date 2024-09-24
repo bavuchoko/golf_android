@@ -14,8 +14,8 @@
         android:background="@android:color/transparent"
        />
     <item
-        android:id="@+id/fragment_competition"
-        android:title="대회"
+        android:id="@+id/fragment_club"
+        android:title="클럽"
         android:icon="@drawable/ic_trophy"
         android:background="@android:color/transparent"
         />

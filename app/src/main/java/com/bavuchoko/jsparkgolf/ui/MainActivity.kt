@@ -6,9 +6,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
-import com.auth0.android.jwt.JWT
 import com.bavuchoko.jsparkgolf.R
-import com.bavuchoko.jsparkgolf.ui.competition.CompetitionFragment
+import com.bavuchoko.jsparkgolf.ui.club.ClubFragment
 import com.bavuchoko.jsparkgolf.ui.field.FieldFragment
 import com.bavuchoko.jsparkgolf.ui.game.GameFragment
 import com.bavuchoko.jsparkgolf.ui.user.UserFragment
@@ -48,10 +47,10 @@ class MainActivity : AppCompatActivity() {
                     // 아이콘 변경
                     bottomNavigationView.menu.findItem(R.id.fragment_field).setIcon(R.drawable.ic_place_filled) // 비슷하게 변경
                 }
-                R.id.fragment_competition -> {
-                    selectedFragment = CompetitionFragment()
+                R.id.fragment_club -> {
+                    selectedFragment = ClubFragment()
                     // 아이콘 변경
-                    bottomNavigationView.menu.findItem(R.id.fragment_competition).setIcon(R.drawable.ic_trophy_filled) // 비슷하게 변경
+                    bottomNavigationView.menu.findItem(R.id.fragment_club).setIcon(R.drawable.ic_trophy_filled) // 비슷하게 변경
                 }
                 R.id.fragment_user -> {
                     selectedFragment = UserFragment()
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                     when (menuItem.itemId) {
                         R.id.fragment_home -> menuItem.setIcon(R.drawable.ic_home)
                         R.id.fragment_field -> menuItem.setIcon(R.drawable.ic_place)
-                        R.id.fragment_competition -> menuItem.setIcon(R.drawable.ic_trophy)
+                        R.id.fragment_club -> menuItem.setIcon(R.drawable.ic_trophy)
                         R.id.fragment_user -> menuItem.setIcon(R.drawable.ic_user)
                     }
                 }
