@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bavuchoko.jsparkgolf.R
 import com.bavuchoko.jsparkgolf.common.CommonMethod
+import com.bavuchoko.jsparkgolf.dialog.ApiLoading
 import com.bavuchoko.jsparkgolf.network.RetrofitFactory
 import com.bavuchoko.jsparkgolf.repository.UserRepository
 import com.bavuchoko.jsparkgolf.ui.MainActivity
@@ -31,6 +32,7 @@ class ActionFragment : Fragment() {
     lateinit var passwordEditText: EditText
     lateinit var loginButton: TextView
     private lateinit var userViewModel: UserViewModel
+    private lateinit var loading: ApiLoading
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +49,7 @@ class ActionFragment : Fragment() {
         passwordEditText = view.findViewById(R.id.et_password)
         loginButton = view.findViewById(R.id.btn_login)
         backButton = view.findViewById(R.id.back_button)
-
+        loading = ApiLoading(requireContext())
         usernameEditText.requestFocus()
         usernameEditText.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
@@ -58,6 +60,7 @@ class ActionFragment : Fragment() {
 
         // 로그인 버튼 클릭 리스너
         loginButton.setOnClickListener {
+            loading.show()
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
             userViewModel.login(username, password)
@@ -69,14 +72,15 @@ class ActionFragment : Fragment() {
 
         userViewModel.jwtToken.observe(viewLifecycleOwner) { token ->
             if (token != null) {
-
                 CommonMethod.saveAccessToken(loginActivity, token)
 
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
+                loading.disappear()
                 activity?.finish()
             } else {
+                loading.disappear()
                 showErrorDialog("네트워크 에러가 발생하였습니다\n관리자에게 문의하세요.")
 //                Toast.makeText(context, "네트워크 에러로 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
             }
