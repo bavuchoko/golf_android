@@ -17,7 +17,7 @@ import javax.net.ssl.X509TrustManager
 
 object RetrofitFactory {
 
-    //    private const val BASE_URL = "https://parkgolf.live:8080"
+    //    private const val BASE_URL = "https://todoro.co.kr"
     private const val BASE_URL = "http://10.0.2.2:8443"
 
     fun create(context: Context): Retrofit {
