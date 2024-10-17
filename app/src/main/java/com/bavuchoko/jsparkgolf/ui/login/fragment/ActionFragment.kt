@@ -1,5 +1,6 @@
 package com.bavuchoko.jsparkgolf.ui.login.fragment
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bavuchoko.jsparkgolf.R
@@ -75,7 +77,8 @@ class ActionFragment : Fragment() {
                 startActivity(intent)
                 activity?.finish()
             } else {
-                // 로그인 실패 처리
+                showErrorDialog("네트워크 에러가 발생하였습니다\n관리자에게 문의하세요.")
+//                Toast.makeText(context, "네트워크 에러로 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -85,7 +88,16 @@ class ActionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
 
-
+    private fun showErrorDialog(message: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("요청 실패")
+        builder.setMessage(message)
+        builder.setPositiveButton("확인") { dialog, _ ->
+            dialog.dismiss()  // 대화상자 닫기
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 }

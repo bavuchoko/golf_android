@@ -7,13 +7,18 @@ class UserRepository (private val userApiService: UserApiService){
 
     suspend fun login(username: String, password: String): String? {
         val userRequest = UserRequestDto(username,password)
-        val response = userApiService.loginUser(userRequest)
-
-        return if(response.isSuccessful){
-            response.body()
-        }else{
+        return  try {
+            val response = userApiService.loginUser(userRequest)
+            if(response.isSuccessful){
+                response.body()
+            }else{
+                null
+            }
+        }catch (e: Exception){
+            e.printStackTrace()
             null
         }
+
 
     }
 }
