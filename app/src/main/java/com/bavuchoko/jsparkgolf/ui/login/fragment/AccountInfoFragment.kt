@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -30,7 +31,7 @@ class AccountInfoFragment: Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_login_join_account, container, false)
-        val prevBtn: TextView = view.findViewById(R.id.prev_btn)
+        val prevBtn: ImageButton = view.findViewById(R.id.prev_button)
         val name = arguments?.getString("name")
         val birth = arguments?.getString("birth")
         val gender = arguments?.getString("gender")

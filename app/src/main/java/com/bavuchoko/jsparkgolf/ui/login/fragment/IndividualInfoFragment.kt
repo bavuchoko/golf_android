@@ -1,12 +1,14 @@
 package com.bavuchoko.jsparkgolf.ui.login.fragment
 
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -29,7 +31,7 @@ class IndividualInfoFragment: Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_login_join_individual, container, false)
-        val prevBtn: TextView = view.findViewById(R.id.prev_btn)
+        val prevBtn: ImageButton = view.findViewById(R.id.back_button)
 
 
         comment = view.findViewById(R.id.comment)

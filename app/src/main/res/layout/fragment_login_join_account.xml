@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="top"
-    android:padding="36dp">
+    android:padding="18dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,14 +15,19 @@
         android:layout_marginEnd="6dp"
         >
 
+        <ImageButton
+            android:id="@+id/prev_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_chevron_left_24"
+            android:background="?attr/selectableItemBackground"
+            android:layout_gravity="start"
+            android:layout_marginEnd="6dp"/>
         <TextView
-            android:id="@+id/prev_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textStyle="bold"
-            android:text="뒤로가기"/>
-
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,6 +47,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="0.4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
     <TextView
         android:id="@+id/comment"
         android:layout_width="wrap_content"
@@ -50,10 +61,7 @@
         android:textSize="28sp"
         android:layout_marginBottom="48dp"
         />
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.1" />
+
     <LinearLayout
         android:id="@+id/sign_up_container"
         android:layout_width="match_parent"
@@ -112,7 +120,7 @@
             android:src="@drawable/baseline_check_24"
             />
         </RelativeLayout>
-
+        </LinearLayout>
     </LinearLayout>
 
 

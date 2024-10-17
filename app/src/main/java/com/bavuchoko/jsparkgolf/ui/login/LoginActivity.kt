@@ -33,11 +33,18 @@ class LoginActivity : AppCompatActivity() {
 
     fun navigateToJoinFragment() {
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.slide_in_from_right, 0)
             .replace(R.id.fragment_container, IndividualInfoFragment())
             .addToBackStack(null)
             .commit()
     }
     fun onPrevBtnClicked() {
-        supportFragmentManager.popBackStack()
+        if (supportFragmentManager.backStackEntryCount > 0){
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_out_to_right, 0) // 애니메이션 추가
+                .commit()
+            supportFragmentManager.popBackStackImmediate()
+        }
+//        supportFragmentManager.popBackStack()
     }
 }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +25,7 @@ class ActionFragment : Fragment() {
 
     lateinit var loginActivity: LoginActivity
     lateinit var usernameEditText: EditText
+    lateinit var backButton: ImageButton
     lateinit var passwordEditText: EditText
     lateinit var loginButton: TextView
     private lateinit var userViewModel: UserViewModel
@@ -42,7 +44,7 @@ class ActionFragment : Fragment() {
         usernameEditText = view.findViewById<EditText>(R.id.et_username)
         passwordEditText = view.findViewById(R.id.et_password)
         loginButton = view.findViewById(R.id.btn_login)
-
+        backButton = view.findViewById(R.id.back_button)
 
         usernameEditText.requestFocus()
         usernameEditText.setOnFocusChangeListener { v, hasFocus ->
@@ -57,6 +59,10 @@ class ActionFragment : Fragment() {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
             userViewModel.login(username, password)
+        }
+
+        backButton.setOnClickListener{
+            (activity as? LoginActivity)?.onPrevBtnClicked()
         }
 
         userViewModel.jwtToken.observe(viewLifecycleOwner) { token ->

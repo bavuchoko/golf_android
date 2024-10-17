@@ -17,11 +17,14 @@ class MainFragment  : Fragment(){
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login_main, container, false)
 
-       view.findViewById<TextView>(R.id.btn_login_jump)
+
 
 
         view.findViewById<TextView>(R.id.btn_login_jump).setOnClickListener {
             (activity as? LoginActivity)?.navigateToActionFragment()
+        }
+        view.findViewById<TextView>(R.id.btn_sign_jump).setOnClickListener {
+            (activity as? LoginActivity)?.navigateToJoinFragment()
         }
 
         return view
