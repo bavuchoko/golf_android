@@ -18,26 +18,11 @@ import javax.net.ssl.X509TrustManager
 object RetrofitFactory {
 
     //    private const val BASE_URL = "https://todoro.co.kr"
-    private const val BASE_URL = "http://10.0.2.2:8443"
+    private const val BASE_URL = "https://todoro.co.kr/api/"
 
     fun create(context: Context): Retrofit {
-        val cf = CertificateFactory.getInstance("X.509")
-        val caInputStream: InputStream = context.resources.openRawResource(R.raw.parkgolf)
-        val ca = cf.generateCertificate(caInputStream)
-        caInputStream.close()
-
-        val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
-        keyStore.load(null, null)
-        keyStore.setCertificateEntry("ca", ca)
-
-        val tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
-        tmf.init(keyStore)
-
-        val sslContext = SSLContext.getInstance("TLS")
-        sslContext.init(null, tmf.trustManagers, SecureRandom())
 
         val client = OkHttpClient.Builder()
-            .sslSocketFactory(sslContext.socketFactory, tmf.trustManagers[0] as X509TrustManager)
             .build()
 
         return Retrofit.Builder()

@@ -30,6 +30,7 @@ retrofit2-converter-scalars = { module = "com.squareup.retrofit2:converter-scala
 jwtdecode = { group = "com.auth0.android", name = "jwtdecode", version.ref = "jwtdecode" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

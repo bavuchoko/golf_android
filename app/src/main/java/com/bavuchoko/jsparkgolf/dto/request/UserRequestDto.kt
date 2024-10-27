@@ -1,4 +1,4 @@
-package com.bavuchoko.jsparkgolf.dto
+package com.bavuchoko.jsparkgolf.dto.request
 
 data class UserRequestDto(
     val username:String,

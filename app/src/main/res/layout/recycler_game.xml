@@ -1,0 +1,36 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- 게임 제목 -->
+    <TextView
+        android:id="@+id/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:text="Game Title"
+        android:paddingBottom="4dp" />
+
+    <!-- 게임 설명 -->
+    <TextView
+        android:id="@+id/gameDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:text="Game description goes here."
+        android:paddingBottom="8dp" />
+
+    <!-- 추가적인 게임 정보 -->
+    <TextView
+        android:id="@+id/gameDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@android:color/black"
+        android:text="Date: 2023-10-24" />
+</LinearLayout>

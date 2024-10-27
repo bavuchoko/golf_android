@@ -1,6 +1,6 @@
 package com.bavuchoko.jsparkgolf.repository
 
-import com.bavuchoko.jsparkgolf.dto.UserRequestDto
+import com.bavuchoko.jsparkgolf.dto.request.UserRequestDto
 import com.bavuchoko.jsparkgolf.service.UserApiService
 
 class UserRepository (private val userApiService: UserApiService){
