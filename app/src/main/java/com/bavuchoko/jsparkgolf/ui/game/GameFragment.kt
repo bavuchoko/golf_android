@@ -37,33 +37,32 @@ class GameFragment : Fragment() {
         nestedScrollView = view.findViewById(R.id.game_nested_container)
         // 게임 리스트 데이터 생성
         val gameList = arrayListOf(
-            GameResponseDto(id = 1, name = "Game 1", description = "Description 1", url = "http://example.com/1"),
-            GameResponseDto(id = 2, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 3, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 4, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 5, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 6, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 7, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 8, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 9, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 10, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 11, name = "Game 2", description = "Description 2", url = "http://example.com/2"),
-            GameResponseDto(id = 12, name = "Game 2", description = "Description 2", url = "http://example.com/2")
+            GameResponseDto(id = 1, name = "Game 1", playDate = "2024-10-10T01:38:51", url = "http://example.com/1"),
+            GameResponseDto(id = 2, name = "Game 2", playDate = "2024-10-10T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 3, name = "Game 2", playDate = "2024-10-10T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 4, name = "Game 2", playDate = "2024-10-10T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 5, name = "Game 2", playDate = "2024-10-10T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 6, name = "Game 2", playDate = "2024-10-10T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 7, name = "Game 2", playDate = "2024-10-09T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 8, name = "Game 2", playDate = "2024-10-09T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 9, name = "Game 2", playDate = "2024-10-09T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 10, name = "Game 2", playDate = "2024-10-09T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 11, name = "Game 2", playDate = "2024-10-08T01:38:51", url = "http://example.com/2"),
+            GameResponseDto(id = 12, name = "Game 2", playDate = "2024-10-07T01:38:51", url = "http://example.com/2")
             // 추가 게임 데이터
         )
-
+        val groupedGames = gameList.groupBy { it.playDate.substring(0, 10) }
         // 어댑터 초기화
-        gameAdapter = GameRecyclerAdapter(gameList, object : GameRecyclerAdapter.OnItemClickListener {
+        val recyclerView: RecyclerView = view.findViewById(R.id.data_list)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+
+        gameAdapter = GameRecyclerAdapter(groupedGames, object : GameRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(url: String) {
-                // URL 클릭 시 동작 정의
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(intent)
             }
         })
-
-        // RecyclerView 설정
-        val recyclerView: RecyclerView = view.findViewById(R.id.data_list)
-        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = gameAdapter
 
         nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->

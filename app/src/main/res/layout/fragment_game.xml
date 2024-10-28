@@ -5,12 +5,20 @@
 
     <LinearLayout
         android:id="@+id/game_top_bar"
-        android:padding="10dp"
+        android:paddingLeft="16dp"
+        android:paddingBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:background="@android:color/transparent"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="세종특별자치시"/>
 
     </LinearLayout>
 
@@ -18,7 +26,8 @@
         android:id="@+id/game_nested_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
+
         android:fillViewport="true">
 
         <LinearLayout
@@ -28,10 +37,55 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="60dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+
                 android:orientation="horizontal"
                 >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:layout_marginRight="15dp"
+                    android:textSize="12sp"
+                    android:background="@color/light_gray"
+                    android:text="참가한"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:layout_marginRight="15dp"
+                    android:textSize="12sp"
+                    android:background="@color/light_gray"
+                    android:text="참가중"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:layout_marginRight="15dp"
+                    android:textSize="12sp"
+                    android:background="@color/light_gray"
+                    android:text="진행중"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:layout_marginRight="15dp"
+                    android:textSize="12sp"
+                    android:background="@color/light_gray"
+                    android:text="종료됨"/>
 
             </LinearLayout>
 
