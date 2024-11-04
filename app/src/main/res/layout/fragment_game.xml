@@ -12,13 +12,14 @@
         android:background="@android:color/transparent"
         android:orientation="horizontal">
 
-        <TextView
+        <Spinner
+            android:id="@+id/city_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="세종특별자치시"/>
+
+            android:spinnerMode="dropdown" />
 
     </LinearLayout>
 

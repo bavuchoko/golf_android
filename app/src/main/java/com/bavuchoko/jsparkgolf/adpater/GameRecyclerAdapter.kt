@@ -1,4 +1,4 @@
-package com.bavuchoko.jsparkgolf.ui.game.adapter
+package com.bavuchoko.jsparkgolf.adpater
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bavuchoko.jsparkgolf.R
-import com.bavuchoko.jsparkgolf.dto.response.GameResponseDto
+import com.bavuchoko.jsparkgolf.vo.GameVo
 
 class GameRecyclerAdapter(
-    private val items: Map<String, List<GameResponseDto>>,
+    private val items: Map<String, List<GameVo>>,
     private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -49,7 +49,7 @@ class GameRecyclerAdapter(
         if (holder is DateViewHolder) {
             holder.bind(itemList[position] as String)
         } else if (holder is GameViewHolder) {
-            holder.bind(itemList[position] as GameResponseDto, itemClickListener)
+            holder.bind(itemList[position] as GameVo, itemClickListener)
         }
     }
 
@@ -61,16 +61,24 @@ class GameRecyclerAdapter(
         private val dateTextView: TextView = view.findViewById(R.id.dateTextView)
 
         fun bind(date: String) {
-            dateTextView.text = date.substring(5,10)
+            dateTextView.text = date.substring(5,7) +"월 "+date.substring(8,10) +"일"
         }
     }
 
     inner class GameViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(game: GameResponseDto, clickListener: OnItemClickListener) {
+        private val host_name_player: TextView = view.findViewById(R.id.host_name_player)
+        private val playTime: TextView = view.findViewById(R.id.play_time)
+        private val fieldName: TextView = view.findViewById(R.id.field_name)
+        private val progressNow: TextView = view.findViewById(R.id.progress_now)
+
+        fun bind(game: GameVo, clickListener: OnItemClickListener) {
+            host_name_player.text = if (game.players.size > 1) "${game.host.name} +${game.players.size}" else " "
+            playTime.text = game.playDate
+            progressNow.text = "${game.progress.half}C : ${game.progress.hole}H"
+
             itemView.setOnClickListener {
-                clickListener.onItemClick(game.url)
+
             }
-            // 게임 정보를 설정하는 추가 코드를 여기에 작성
         }
     }
 }

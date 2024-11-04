@@ -1,8 +1,6 @@
 package com.bavuchoko.jsparkgolf.ui.user
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +27,7 @@ class UserFragment : Fragment() {
 
         logoutBtn = view.findViewById(R.id.log_out_btn)
         val accessToken = CommonMethod.getToken(mainActivity)
-        val userName = CommonMethod.getName(accessToken ?: "")
+        val userName = CommonMethod.getValue(requireContext(),"name")
 
         userNameTextView = view.findViewById(R.id.user_name)
         userNameTextView.text = userName
