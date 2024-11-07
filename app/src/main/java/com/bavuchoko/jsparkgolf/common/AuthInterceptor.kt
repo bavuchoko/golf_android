@@ -29,9 +29,15 @@ class AuthInterceptor(
 
         if (!response.isSuccessful && response.code() == 401) {
             // 토큰 갱신 시도
+            val refreshToken = CommonMethod.getValue(context, "refreshToken") ?: ""
             val newToken = runBlocking {
                 try {
-                    val refreshResponse = userApiService.refreshToken() // 토큰 갱신 요청
+                    val refreshRequest = request.newBuilder()
+                        .url("your_base_url/auth/reissue") // 갱신 엔드포인트로 URL 설정
+                        .addHeader("Cookie", "refreshToken=$refreshToken")
+                        .build()
+                    val refreshResponse = chain.proceed(refreshRequest)
+
                     if (refreshResponse.isSuccessful) {
                         refreshResponse.body()
                     } else {

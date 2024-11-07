@@ -18,7 +18,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
             val (accessToken, refreshToken) = userRepository.login(username, password)
             _jwtToken.value = accessToken
             refreshToken?.let {
-                CommonMethod.saveValue(context, "refresh_token", it)
+                CommonMethod.saveValue(context, "refreshToken", it)
             }
         }
     }

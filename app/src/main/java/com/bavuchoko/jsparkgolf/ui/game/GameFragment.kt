@@ -47,6 +47,9 @@ class GameFragment : Fragment() {
         val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, locations)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
+        val recyclerView: RecyclerView = view.findViewById(R.id.data_list)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         val locationSpinner: Spinner = view.findViewById(R.id.city_spinner)
         locationSpinner.adapter = spinnerAdapter
 
@@ -57,7 +60,7 @@ class GameFragment : Fragment() {
         val gameRepository = GameRepository(gameService);
         gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
 
-        gameViewModel.getList(0,10,"OPEN", false,"SEJONG")
+        gameViewModel.getList(0,10,"OPEN", false,"세종특별시")
 
 
         gameViewModel.gameList.observe(viewLifecycleOwner){ gameList ->
@@ -70,7 +73,7 @@ class GameFragment : Fragment() {
                         startActivity(intent)
                     }
                 })
-                view.findViewById<RecyclerView>(R.id.data_list).adapter = gameAdapter
+                recyclerView.adapter = gameAdapter
             }
         }
 
