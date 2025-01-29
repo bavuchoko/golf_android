@@ -1,10 +1,8 @@
 package com.bavuchoko.jsparkgolf.service
 
 import com.bavuchoko.jsparkgolf.response.GameResponse
-import com.bavuchoko.jsparkgolf.vo.GameVo
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface GameApiService {
