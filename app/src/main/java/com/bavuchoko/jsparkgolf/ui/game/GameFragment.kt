@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bavuchoko.jsparkgolf.R
 import com.bavuchoko.jsparkgolf.vo.GameVo
 import com.bavuchoko.jsparkgolf.adpater.GameRecyclerAdapter
+import com.bavuchoko.jsparkgolf.common.CommonMethod
 import com.bavuchoko.jsparkgolf.network.RetrofitFactory
 import com.bavuchoko.jsparkgolf.repository.GameRepository
 import com.bavuchoko.jsparkgolf.service.GameApiService
@@ -42,9 +43,16 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val city = CommonMethod.getValue(requireContext(), "city") ?: "세종특별시"
+        var page:Int = 0
+        var size:Int = 10
+        var status:String ="OPEN"
+        var player:Boolean =false
+        val selection: MutableList<String>
+            = if(CommonMethod.getValue(requireContext(), "city") != null) mutableListOf(city, "내 지역 설정") else  mutableListOf("내 지역")
 
-        val locations = arrayOf("세종특별자치시", "서울특별시", "부산광역시")
-        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, locations)
+
+        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, selection)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.data_list)
@@ -58,9 +66,12 @@ class GameFragment : Fragment() {
 
         val gameService = RetrofitFactory.create(requireContext()).create(GameApiService::class.java)
         val gameRepository = GameRepository(gameService);
-        gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
 
-        gameViewModel.getList(0,10,"OPEN", false,"세종특별시")
+        gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
+        gameViewModel.getList(page, size, status, player, city)
+
+
+
 
 
         gameViewModel.gameList.observe(viewLifecycleOwner){ gameList ->
