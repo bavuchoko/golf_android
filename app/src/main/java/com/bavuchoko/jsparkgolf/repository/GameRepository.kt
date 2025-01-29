@@ -2,6 +2,8 @@ package com.bavuchoko.jsparkgolf.repository
 
 import com.bavuchoko.jsparkgolf.service.GameApiService
 import com.bavuchoko.jsparkgolf.vo.GameVo
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 class GameRepository(private val apiService: GameApiService) {
 
