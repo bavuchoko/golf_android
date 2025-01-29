@@ -40,19 +40,16 @@ object CommonMethod {
     }
 
 
-    fun getValue(context: Context, type: String): String{
+    fun getValue(context: Context, type: String): String?{
         val jwtToken = getToken(context)
-        if (jwtToken != null) {
+        return jwtToken?.let {
             try {
-                val jwt = JWT(jwtToken)
-                val value = jwt.getClaim(type).asString()
-                return value ?: "Unknown"
+                val jwt = JWT(it) // 안전 호출로 null 확인 후 처리
+                jwt.getClaim(type).asString()
             } catch (e: Exception) {
                 e.printStackTrace()
-                return "Error parsing token"
+                null // 예외 발생 시 null 반환
             }
-        } else {
-            return "Token not found"
         }
     }
 
