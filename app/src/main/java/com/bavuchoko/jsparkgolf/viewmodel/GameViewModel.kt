@@ -11,11 +11,13 @@ import kotlinx.coroutines.launch
 class GameViewModel(private val gameRepository: GameRepository): ViewModel() {
     private val _gameList = MutableLiveData<List<GameVo>>()
     val gameList: LiveData<List<GameVo>> get() = _gameList
-
+    var city: String = ""
+    var status: String ="OPEN"
+    var player: Boolean =true
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
 
-    fun getList(page: Int, size: Int, status: String, player: Boolean, city: String) {
+    fun getList(page: Int, size: Int) {
         viewModelScope.launch {
             val result =  gameRepository.getList(page, size, status, player, city)
             if (result.isSuccess) {

@@ -13,16 +13,6 @@ object CommonMethod {
         val preference : SharedPreferences = context.getSharedPreferences(PREFERENCES_ALIAS, Context.MODE_PRIVATE)
         val editor : SharedPreferences.Editor = preference.edit()
         editor.putString("accessToken", token);
-        try {
-            val jwt = JWT(token)
-            editor.putString("name", jwt.getClaim("name").asString())
-            editor.putString("city", jwt.getClaim("city").asString()?: "??")
-            editor.putString("age", jwt.getClaim("age").asString() ?: "??")
-            editor.putString("gender", jwt.getClaim("gender").asString())
-            editor.putString("birth", jwt.getClaim("birth").asString())
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
         editor.apply();
     }
 
@@ -30,7 +20,7 @@ object CommonMethod {
     fun saveValue(context : Context, target: String, token : String)  {
         val preference : SharedPreferences = context.getSharedPreferences(PREFERENCES_ALIAS, Context.MODE_PRIVATE)
         val editor : SharedPreferences.Editor = preference.edit()
-        editor.putString("target", token);
+        editor.putString(target, token);
         editor.apply();
     }
 
@@ -51,6 +41,18 @@ object CommonMethod {
                 null // 예외 발생 시 null 반환
             }
         }
+    }
+    fun getStoredValue(context: Context, type: String): String?{
+        val preference: SharedPreferences = context.getSharedPreferences(PREFERENCES_ALIAS, Context.MODE_PRIVATE)
+        return preference.getString(type, null)
+    }
+
+
+    fun clearAllValue(context: Context) {
+        val preference : SharedPreferences = context.getSharedPreferences(PREFERENCES_ALIAS, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = preference.edit()
+        editor.clear()
+        editor.apply()
     }
 
 

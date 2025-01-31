@@ -35,7 +35,7 @@ class UserFragment : Fragment() {
 
 
         logoutBtn.setOnClickListener {
-            CommonMethod.clearValue(mainActivity, "accessToken")
+            CommonMethod.clearAllValue(mainActivity)
             AuthUtils.checkLoginStatus(mainActivity)
         }
         return view
