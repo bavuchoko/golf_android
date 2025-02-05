@@ -43,12 +43,44 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/data_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/empty"
+            android:contentDescription="No Data Icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="조회 결과가 없습니다."
+            android:layout_marginTop="30dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:paddingTop="8dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"/>
+    </LinearLayout>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/game_nested_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-
+        android:visibility="gone"
         android:fillViewport="true">
 
         <LinearLayout
@@ -83,7 +115,7 @@
                     android:layout_marginEnd="10dp"
                     android:textStyle="bold"
                     android:textColor="@color/dee_gray"
-                    android:text="참가중" />
+                    android:text="대기중" />
 
                 <android.widget.Button
                     android:id="@+id/btn_search_playing"

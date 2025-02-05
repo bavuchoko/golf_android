@@ -108,8 +108,9 @@ class GameFragment : Fragment() {
         nestedScrollView = view.findViewById(R.id.game_nested_container)
 
 
-        gameViewModel.getList(page, size)
-
+        if(!city.isNullOrBlank()) {
+            gameViewModel.getList(page, size)
+        }
 
 
 
