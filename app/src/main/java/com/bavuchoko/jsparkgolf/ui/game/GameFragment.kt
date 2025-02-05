@@ -7,10 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
@@ -33,6 +31,8 @@ class GameFragment : Fragment() {
     private lateinit var topBar: LinearLayout
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var gameViewModel: GameViewModel
+    private lateinit var btnMyPlace: Button
+    private lateinit var btnMyPlaceSetting: Button
     private lateinit var btnSearchOpen: Button
     private lateinit var btnSearchPlaying: Button
     private lateinit var btnSearchClose: Button
@@ -53,6 +53,10 @@ class GameFragment : Fragment() {
         val gameService = RetrofitFactory.create(requireContext()).create(GameApiService::class.java)
         val gameRepository = GameRepository(gameService);
 
+        btnMyPlace = view.findViewById(R.id.btn_my_place)
+        btnMyPlaceSetting = view.findViewById(R.id.setting_my_place)
+
+
         btnSearchOpen = view.findViewById(R.id.btn_search_open)
         btnSearchPlaying = view.findViewById(R.id.btn_search_playing)
         btnSearchClose = view.findViewById(R.id.btn_search_close)
@@ -60,7 +64,6 @@ class GameFragment : Fragment() {
 
         gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
 
-        updateButtonStyles()
 
         // 버튼 클릭 리스너 추가
         btnSearchOpen.setOnClickListener {
@@ -88,24 +91,18 @@ class GameFragment : Fragment() {
         }
 
         val jwtCity: String? = CommonMethod.getStoredValue(requireContext(), "city");
-        var city: String = jwtCity ?: "세종특별시"
+        var city: String? = jwtCity
         gameViewModel.city = city
         var page: Int = 0
         var size: Int = 10
-        var selection: MutableList<String>
-            = if(jwtCity != null)
-                mutableListOf(city, "내 지역 설정")
-            else  mutableListOf("내 지역")
+
+        updateButtonStyles()
+        updateMyPlaceButton(city)
 
 
-        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, selection)
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.data_list)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        val locationSpinner: Spinner = view.findViewById(R.id.city_spinner)
-        locationSpinner.adapter = spinnerAdapter
 
         topBar = view.findViewById(R.id.game_top_bar)
         nestedScrollView = view.findViewById(R.id.game_nested_container)
@@ -156,5 +153,16 @@ class GameFragment : Fragment() {
         btnSearchClose.setTextColor(if (gameViewModel.status == "CLOSED") selectedTextColor else defaultTextColor)
         btnSearchPlayer.background = if (gameViewModel.player) selectedBg else defaultBg
         btnSearchPlayer.setTextColor(if (gameViewModel.player) selectedTextColor else defaultTextColor)
+    }
+
+    private fun updateMyPlaceButton(city:String?){
+        if(city==null){
+            btnMyPlaceSetting.visibility= View.VISIBLE
+            btnMyPlace.visibility= View.GONE
+        }else{
+            btnMyPlaceSetting.visibility= View.GONE
+            btnMyPlace.visibility= View.VISIBLE
+            btnMyPlace.text= city
+        }
     }
 }
