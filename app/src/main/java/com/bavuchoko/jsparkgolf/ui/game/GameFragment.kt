@@ -26,6 +26,7 @@ import com.bavuchoko.jsparkgolf.common.CommonMethod
 import com.bavuchoko.jsparkgolf.network.RetrofitFactory
 import com.bavuchoko.jsparkgolf.repository.GameRepository
 import com.bavuchoko.jsparkgolf.service.GameApiService
+import com.bavuchoko.jsparkgolf.ui.MyPlaceSettingActivity
 import com.bavuchoko.jsparkgolf.viewmodel.GameViewModel
 import com.bavuchoko.jsparkgolf.viewmodel.factory.GameViewModelFactory
 
@@ -75,24 +76,39 @@ class GameFragment : Fragment() {
         gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
 
         // 버튼 클릭 리스너 추가
+        
+        //지역설정 버튼
+//        btnMyPlaceSetting.setOnClickListener {
+//            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+//            transaction.replace(R.id.content_container, MyPlaceSettingFragment())
+//            transaction.addToBackStack(null)
+//            transaction.commit()
+//        }
+        btnMyPlaceSetting.setOnClickListener {
+            val intent = Intent(requireContext(), MyPlaceSettingActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        //대기중 버튼
         btnSearchOpen.setOnClickListener {
             gameViewModel.status = "OPEN"
             updateButtonStyles()
             gameViewModel.getList(0, 10)
         }
-
+        //진행중 버튼
         btnSearchPlaying.setOnClickListener {
             gameViewModel.status = "PLAYING"
             updateButtonStyles()
             gameViewModel.getList(0, 10)
         }
-
+        //종료됨 버튼
         btnSearchClose.setOnClickListener {
             gameViewModel.status = "CLOSED"
             updateButtonStyles()
             gameViewModel.getList(0, 10)
         }
-
+        //내 경기 버튼
         btnSearchPlayer.setOnClickListener {
             gameViewModel.player = !gameViewModel.player
             updateButtonStyles()
