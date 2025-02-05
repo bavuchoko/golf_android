@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets
 
 class GameRepository(private val apiService: GameApiService) {
 
-    suspend fun getList(page: Int, size: Int, status: String, player: Boolean, city: String): Result<List<GameVo>> {
+    suspend fun getList(page: Int, size: Int, status: String, player: Boolean, city: String?): Result<List<GameVo>> {
         return try {
             val response = apiService.getGameList(page, size, status, player, city)
             if (response.isSuccessful) {

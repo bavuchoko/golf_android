@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class GameViewModel(private val gameRepository: GameRepository): ViewModel() {
     private val _gameList = MutableLiveData<List<GameVo>>()
     val gameList: LiveData<List<GameVo>> get() = _gameList
-    var city: String = ""
+    var city: String? = null
     var status: String ="OPEN"
     var player: Boolean =true
     private val _error = MutableLiveData<String?>()
