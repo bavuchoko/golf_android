@@ -1,5 +1,7 @@
 package com.bavuchoko.jsparkgolf.ui.game
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -7,7 +9,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
@@ -29,7 +34,10 @@ class GameFragment : Fragment() {
 
     private lateinit var gameAdapter: GameRecyclerAdapter
     private lateinit var topBar: LinearLayout
+    private lateinit var nullMyPlace: FrameLayout
+    private lateinit var noDataNotice: LinearLayout
     private lateinit var nestedScrollView: NestedScrollView
+
     private lateinit var gameViewModel: GameViewModel
     private lateinit var btnMyPlace: Button
     private lateinit var btnMyPlaceSetting: Button
@@ -37,6 +45,7 @@ class GameFragment : Fragment() {
     private lateinit var btnSearchPlaying: Button
     private lateinit var btnSearchClose: Button
     private lateinit var btnSearchPlayer: Button
+    private lateinit var arrowUp: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,9 +70,9 @@ class GameFragment : Fragment() {
         btnSearchPlaying = view.findViewById(R.id.btn_search_playing)
         btnSearchClose = view.findViewById(R.id.btn_search_close)
         btnSearchPlayer = view.findViewById(R.id.btn_search_player)
+        arrowUp = view.findViewById(R.id.arrow_up);
 
         gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
-
 
         // 버튼 클릭 리스너 추가
         btnSearchOpen.setOnClickListener {
@@ -106,10 +115,19 @@ class GameFragment : Fragment() {
 
         topBar = view.findViewById(R.id.game_top_bar)
         nestedScrollView = view.findViewById(R.id.game_nested_container)
+        noDataNotice = view.findViewById(R.id.no_data_notice)
+        nullMyPlace = view.findViewById(R.id.notice_my_place_null)
+        nestedScrollView = view.findViewById(R.id.game_nested_container)
 
 
         if(!city.isNullOrBlank()) {
+            nullMyPlace.visibility= View.GONE
             gameViewModel.getList(page, size)
+        }else{
+            nestedScrollView.visibility= View.GONE
+            noDataNotice.visibility= View.GONE
+            nullMyPlace.visibility= View.VISIBLE
+            arrowUpAnim();
         }
 
 
@@ -165,5 +183,15 @@ class GameFragment : Fragment() {
             btnMyPlace.visibility= View.VISIBLE
             btnMyPlace.text= city
         }
+    }
+    
+
+    private fun arrowUpAnim(){
+        val animator = ObjectAnimator.ofFloat(arrowUp, "translationY", 0f, 30f)
+        animator.setDuration(500) // 0.5초 동안 이동
+        animator.interpolator = LinearInterpolator()
+        animator.repeatMode = ValueAnimator.REVERSE // 위-아래 반복
+        animator.repeatCount = ValueAnimator.INFINITE // 무한 반복
+        animator.start()
     }
 }

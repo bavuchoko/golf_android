@@ -43,11 +43,57 @@
 
     </LinearLayout>
 
+<!--  지역설정 안했을 경우 -->
+    <FrameLayout
+        android:id="@+id/notice_my_place_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/arrow_up"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/arrow_up"
+            android:contentDescription="No Data Icon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center" >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ground"
+            android:contentDescription="No Data Icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지역을 알려주세요..."
+            android:layout_marginTop="30dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:paddingTop="8dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"/>
+        </LinearLayout>
+    </FrameLayout>
+
+<!--   조회 데이터가 없을 경우 -->
     <LinearLayout
-        android:id="@+id/data_notice"
+        android:id="@+id/no_data_notice"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="gone"
         android:gravity="center"
         android:padding="16dp">
         <View
@@ -76,11 +122,13 @@
             android:layout_weight="1.5"/>
     </LinearLayout>
 
+<!--   정상 데이터 조회 -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/game_nested_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
+        android:padding="16dp"
         android:fillViewport="true">
 
         <LinearLayout
