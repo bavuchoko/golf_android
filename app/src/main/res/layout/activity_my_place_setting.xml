@@ -1,38 +1,51 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <!-- Content Area -->
-    <FrameLayout
-        android:id="@+id/content_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
     <LinearLayout
         android:id="@+id/my_place_setting_top_bar"
         android:paddingLeft="16dp"
-        android:paddingBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:paddingBottom="10dp"
         android:background="@android:color/transparent"
         android:orientation="horizontal">
 
 
         <android.widget.Button
             android:id="@+id/btn_back"
-            android:layout_width="50dp"
-            android:layout_height="30sp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
             android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
             android:background="@android:color/transparent"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"
             android:visibility="visible"
             android:drawableStart="@drawable/baseline_arrow_back_ios_24"
-            android:drawablePadding="4dp"
-            android:text="" />
+            android:drawablePadding="4dp"/>
 
     </LinearLayout>
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:text="지역을 선택하세요"/>
+        <!-- GridLayout -->
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/grid_sido"
+        android:layout_below="@id/my_place_setting_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_marginTop="10dp"
+        app:columnCount="3"
+        app:orientation="horizontal" />
+
+</LinearLayout>
