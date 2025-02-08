@@ -14,6 +14,10 @@ interface UserApiService {
     suspend fun loginUser(@Body userRequestDto: UserRequestDto): Response<String>
 
 
+    @GET("user/region")
+    suspend fun getUserRegion(): Response<String>
+
+
     @POST("auth/reissue")
     suspend fun refreshToken(): Response<ResponseBody>
 

@@ -44,7 +44,7 @@ class ActionFragment : Fragment() {
         view.setBackgroundColor(resources.getColor(R.color.white))
 
         val userApiService = RetrofitFactory.create(requireContext()).create(UserApiService::class.java)
-        val userRepository = UserRepository(userApiService)
+        val userRepository = UserRepository(userApiService, requireContext())
         userViewModel = ViewModelProvider(this, UserViewModelFactory(userRepository)).get(UserViewModel::class.java)
 
         usernameEditText = view.findViewById<EditText>(R.id.et_username)
@@ -65,7 +65,7 @@ class ActionFragment : Fragment() {
             loading.show()
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
-            userViewModel.login(username, password, requireContext())
+            userViewModel.login(username, password)
         }
 
         backButton.setOnClickListener{
@@ -74,7 +74,6 @@ class ActionFragment : Fragment() {
 
         userViewModel.jwtToken.observe(viewLifecycleOwner) { token ->
             if (token != null) {
-                CommonMethod.saveAccessToken(loginActivity, token)
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
@@ -100,7 +99,7 @@ class ActionFragment : Fragment() {
         builder.setTitle("요청 실패")
         builder.setMessage(message)
         builder.setPositiveButton("확인") { dialog, _ ->
-            dialog.dismiss()  // 대화상자 닫기
+            dialog.dismiss()
         }
         val dialog = builder.create()
         dialog.show()
