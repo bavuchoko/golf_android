@@ -48,7 +48,7 @@ class GameFragment : Fragment() {
     private lateinit var btnSearchPlayer: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var arrowUp: ImageView
-    private var city: String? = null
+    private var region: String? = null
     private var page: Int = 0
     private var size: Int = 10
 
@@ -111,12 +111,12 @@ class GameFragment : Fragment() {
             gameViewModel.getList(0, 10)
         }
 
-        val jwtCity: String? = CommonMethod.getStoredValue(requireContext(), "city");
-        city = jwtCity
-        gameViewModel.city = city
+        val jwtCity: String? = CommonMethod.getStoredValue(requireContext(), "region");
+        region = jwtCity
+        gameViewModel.city = region
 
         updateButtonStyles()
-        updateMyPlaceButton(city)
+        updateMyPlaceButton(region)
 
 
 
@@ -130,7 +130,7 @@ class GameFragment : Fragment() {
         nestedScrollView = view.findViewById(R.id.game_nested_container)
 
 
-        viewSwitch(city, page, size)
+        viewSwitch(region, page, size)
 
 
 
@@ -151,23 +151,30 @@ class GameFragment : Fragment() {
     private fun setGameListView(recyclerView: RecyclerView) {
         gameViewModel.gameList.observe(viewLifecycleOwner) { gameList ->
             if (gameList != null) {
-                val groupedGames = gameList.groupBy { it.playDate.substring(0, 10) }
+                if(gameList.size==0){
+                    nestedScrollView.visibility=View.GONE
+                    noDataNotice.visibility=View.VISIBLE
+                }else {
+                    noDataNotice.visibility=View.GONE
+                    nestedScrollView.visibility = View.VISIBLE
+                    val groupedGames = gameList.groupBy { it.playDate.substring(0, 10) }
 
-                gameAdapter = GameRecyclerAdapter(
-                    groupedGames,
-                    object : GameRecyclerAdapter.OnItemClickListener {
-                        override fun onItemClick(url: String) {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                            startActivity(intent)
-                        }
-                    })
-                recyclerView.adapter = gameAdapter
+                    gameAdapter = GameRecyclerAdapter(
+                        groupedGames,
+                        object : GameRecyclerAdapter.OnItemClickListener {
+                            override fun onItemClick(url: String) {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                startActivity(intent)
+                            }
+                        })
+                    recyclerView.adapter = gameAdapter
+                }
             }
         }
     }
 
-    private fun viewSwitch(city: String?, page: Int, size: Int) {
-        if (!city.isNullOrBlank()) {
+    private fun viewSwitch(region: String?, page: Int, size: Int) {
+        if (!region.isNullOrBlank()) {
             nullMyPlace.visibility = View.GONE
             gameViewModel.getList(page, size)
         } else {
@@ -220,7 +227,7 @@ class GameFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 //        updateMyPlaceButton()
-        val jwtCity: String? = CommonMethod.getStoredValue(requireContext(), "city")
+        val jwtCity: String? = CommonMethod.getStoredValue(requireContext(), "region")
         jwtCity
 
         // UI 업데이트 (지역 설정 버튼 상태 변경)
