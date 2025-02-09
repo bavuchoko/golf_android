@@ -130,15 +130,6 @@ class GameFragment : Fragment() {
         nestedScrollView = view.findViewById(R.id.game_nested_container)
 
 
-        viewSwitch(region, page, size)
-
-
-
-
-        setGameListView(recyclerView)
-
-
-
         nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (scrollY > 50) {
                 topBar.setBackgroundResource(R.drawable.border_bottom) // 경계선 추가
@@ -233,8 +224,6 @@ class GameFragment : Fragment() {
         // UI 업데이트 (지역 설정 버튼 상태 변경)
 //        updateMyPlaceButton(jwtCity)
 
-        // 게임 목록 새로 불러오기
-        gameViewModel.getList(0, 10)
         viewSwitch(jwtCity, page, size)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         setGameListView(recyclerView)
