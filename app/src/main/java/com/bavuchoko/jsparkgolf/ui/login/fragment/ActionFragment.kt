@@ -20,7 +20,7 @@ import com.bavuchoko.jsparkgolf.dialog.ApiLoading
 import com.bavuchoko.jsparkgolf.network.RetrofitFactory
 import com.bavuchoko.jsparkgolf.repository.UserRepository
 import com.bavuchoko.jsparkgolf.service.UserApiService
-import com.bavuchoko.jsparkgolf.ui.MainActivity
+import com.bavuchoko.jsparkgolf.ui.main.MainActivity
 import com.bavuchoko.jsparkgolf.ui.login.LoginActivity
 import com.bavuchoko.jsparkgolf.viewmodel.UserViewModel
 import com.bavuchoko.jsparkgolf.viewmodel.factory.UserViewModelFactory

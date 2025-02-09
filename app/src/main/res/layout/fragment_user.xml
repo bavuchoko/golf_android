@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.user.UserFragment">
+    tools:context=".ui.main.user.UserFragment">
 
     <!-- 상단 영역: 좌우 배치 -->
     <LinearLayout
