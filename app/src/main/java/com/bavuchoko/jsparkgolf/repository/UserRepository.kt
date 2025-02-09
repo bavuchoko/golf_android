@@ -1,7 +1,9 @@
 package com.bavuchoko.jsparkgolf.repository
 
 import android.content.Context
+import android.util.Log
 import com.bavuchoko.jsparkgolf.common.CommonMethod
+import com.bavuchoko.jsparkgolf.dto.request.RegionRequestDto
 import com.bavuchoko.jsparkgolf.dto.request.UserRequestDto
 import com.bavuchoko.jsparkgolf.service.UserApiService
 
@@ -22,6 +24,26 @@ class UserRepository (private val userApiService: UserApiService, private val co
             Pair(null, null)
         }
     }
+
+    suspend fun updateUserRegion(sido: String): String? {
+        return try {
+            val response = userApiService.saveUserRegion(RegionRequestDto(sido))
+            if (response.isSuccessful) {
+                val region = response.body()
+                region?.let {
+                    saveValue("region", it)
+                }
+                region
+            } else {
+                Log.e("API", "Failed to save region: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("API", "Exception: ${e.message}")
+            null
+        }
+    }
+
 
     private fun saveAccessToken(token: String) {
         CommonMethod.saveAccessToken(context, token)

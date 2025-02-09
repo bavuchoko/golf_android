@@ -21,4 +21,11 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
             _userRegion.value = region
         }
     }
+    fun saveRegion(sido: String) {
+        viewModelScope.launch {
+            val region = userRepository.updateUserRegion(sido)
+            _userRegion.value = region
+        }
+    }
+
 }
