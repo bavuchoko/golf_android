@@ -80,7 +80,13 @@ class GameFragment : Fragment() {
         gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
 
         // 버튼 클릭 리스너 추가
+
         btnMyPlaceSetting.setOnClickListener {
+            val intent = Intent(requireContext(), MyPlaceSettingActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnMyPlace.setOnClickListener {
             val intent = Intent(requireContext(), MyPlaceSettingActivity::class.java)
             startActivity(intent)
         }
