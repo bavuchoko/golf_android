@@ -1,7 +1,6 @@
 package com.bavuchoko.jsparkgolf.ui.login
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bavuchoko.jsparkgolf.R
 import com.bavuchoko.jsparkgolf.ui.login.fragment.ActionFragment

@@ -11,11 +11,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bavuchoko.jsparkgolf.R
-import com.bavuchoko.jsparkgolf.common.CommonMethod
 import com.bavuchoko.jsparkgolf.dialog.ApiLoading
 import com.bavuchoko.jsparkgolf.network.RetrofitFactory
 import com.bavuchoko.jsparkgolf.repository.UserRepository

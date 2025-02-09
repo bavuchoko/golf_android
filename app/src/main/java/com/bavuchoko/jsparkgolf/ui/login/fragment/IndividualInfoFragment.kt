@@ -1,7 +1,6 @@
 package com.bavuchoko.jsparkgolf.ui.login.fragment
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Im
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
