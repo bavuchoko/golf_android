@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,7 +9,8 @@
         android:paddingLeft="16dp"
         android:paddingBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_height="100dp"
         android:background="@android:color/transparent"
         android:orientation="horizontal">
 
@@ -39,14 +40,14 @@
             android:drawableEnd="@drawable/baseline_settings_24"
             android:drawablePadding="4dp"
             android:text="지역설정" />
-
-
     </LinearLayout>
 
 <!--  지역설정 안했을 경우 -->
     <FrameLayout
         android:id="@+id/notice_my_place_null"
         android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_below="@id/game_top_bar"
         android:layout_height="match_parent">
         <ImageView
             android:id="@+id/arrow_up"
@@ -94,7 +95,8 @@
         android:id="@+id/game_nested_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:layout_below="@id/game_top_bar"
+        android:visibility="visible"
         android:padding="16dp"
         android:fillViewport="true">
 
@@ -106,8 +108,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="15dp"
-                android:layout_marginVertical="10dp"
                 android:orientation="horizontal">
 
                 <android.widget.Button
@@ -199,7 +199,18 @@
                 android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/board_write"
+        android:layout_width="98dp"
+        android:layout_height="103dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="110dp"
+        android:src="@drawable/baseline_add_24" >
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-</LinearLayout>
+</RelativeLayout>
