@@ -144,7 +144,6 @@ class GameFragment : Fragment() {
         nestedScrollView = view.findViewById(R.id.game_nested_container)
         noDataNotice = view.findViewById(R.id.no_data_notice)
         nullMyPlace = view.findViewById(R.id.notice_my_place_null)
-        nestedScrollView = view.findViewById(R.id.game_nested_container)
 
 
         nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -161,13 +160,14 @@ class GameFragment : Fragment() {
 
     private fun setGameListView(recyclerView: RecyclerView) {
         gameViewModel.gameList.observe(viewLifecycleOwner) { gameList ->
+            nestedScrollView.visibility=View.VISIBLE
             if (gameList != null) {
                 if(gameList.size==0){
-                    nestedScrollView.visibility=View.GONE
                     noDataNotice.visibility=View.VISIBLE
+                    recyclerView.visibility=View.GONE
                 }else {
                     noDataNotice.visibility=View.GONE
-                    nestedScrollView.visibility = View.VISIBLE
+                    recyclerView.visibility=View.VISIBLE
                     val groupedGames = gameList.groupBy { it.playDate.substring(0, 10) }
 
                     gameAdapter = GameRecyclerAdapter(
