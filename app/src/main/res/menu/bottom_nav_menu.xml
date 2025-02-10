@@ -4,25 +4,25 @@
     <item
         android:id="@+id/fragment_home"
         android:title="홈"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/filled_home"
         android:background="@android:color/transparent"
         />
     <item
         android:id="@+id/fragment_field"
         android:title="필드"
-        android:icon="@drawable/ic_place"
+        android:icon="@drawable/filled_pin"
         android:background="@android:color/transparent"
        />
     <item
         android:id="@+id/fragment_club"
         android:title="클럽"
-        android:icon="@drawable/ic_trophy"
+        android:icon="@drawable/filled_trophy"
         android:background="@android:color/transparent"
         />
     <item
         android:id="@+id/fragment_user"
         android:title="사용자"
-        android:icon="@drawable/ic_user"
+        android:icon="@drawable/filled_user"
         android:background="@android:color/transparent"
        />
 

@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemTextColor="@color/black"
+        app:itemTextColor="@color/selector_icon_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:itemIconTint="@color/selector_icon_color"
         app:labelVisibilityMode="labeled"
