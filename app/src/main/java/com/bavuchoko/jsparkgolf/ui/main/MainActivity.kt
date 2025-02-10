@@ -4,9 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import com.bavuchoko.jsparkgolf.R
+import com.bavuchoko.jsparkgolf.ui.main.club.ClubFragment
+import com.bavuchoko.jsparkgolf.ui.main.field.FieldFragment
 import com.bavuchoko.jsparkgolf.ui.main.game.GameFragment
+import com.bavuchoko.jsparkgolf.ui.main.user.UserFragment
 import com.bavuchoko.jsparkgolf.ui.utils.AuthUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -31,6 +35,22 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             var selectedFragment: Fragment? = null
+
+            when (item.itemId) {
+                R.id.fragment_home -> {
+                    selectedFragment = GameFragment()
+                }
+                R.id.fragment_field -> {
+                    selectedFragment = FieldFragment()
+                }
+                R.id.fragment_club -> {
+                    selectedFragment = ClubFragment()
+                }
+                R.id.fragment_user -> {
+                    selectedFragment = UserFragment()
+                }
+            }
+
 
             selectedFragment?.let { loadFragment(it) }
 
