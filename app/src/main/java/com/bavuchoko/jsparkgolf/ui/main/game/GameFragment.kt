@@ -198,7 +198,7 @@ class GameFragment : Fragment() {
 
     // 버튼 상태에 따라 스타일 변경
     private fun updateButtonStyles() {
-        val selectedBg = ContextCompat.getDrawable(requireContext(), R.drawable.btn_selected_basic)
+        val selectedBg = ContextCompat.getDrawable(requireContext(), R.color.app_color)
         val defaultBg = ContextCompat.getDrawable(requireContext(), R.drawable.btn_un_selected_basic)
         val selectedTextColor = ContextCompat.getColor(requireContext(), android.R.color.white)
         val defaultTextColor = ContextCompat.getColor(requireContext(), R.color.dee_gray)
