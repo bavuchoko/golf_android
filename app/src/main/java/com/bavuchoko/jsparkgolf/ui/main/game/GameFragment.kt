@@ -1,7 +1,5 @@
 package com.bavuchoko.jsparkgolf.ui.main.game
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -10,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -24,13 +21,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bavuchoko.jsparkgolf.R
 import com.bavuchoko.jsparkgolf.adpater.GameRecyclerAdapter
 import com.bavuchoko.jsparkgolf.common.CommonMethod
+import com.bavuchoko.jsparkgolf.component.main.game.GameAnimator
 import com.bavuchoko.jsparkgolf.network.RetrofitFactory
 import com.bavuchoko.jsparkgolf.repository.GameRepository
 import com.bavuchoko.jsparkgolf.repository.UserRepository
 import com.bavuchoko.jsparkgolf.service.GameApiService
 import com.bavuchoko.jsparkgolf.service.UserApiService
-import com.bavuchoko.jsparkgolf.ui.main.MainActivity
 import com.bavuchoko.jsparkgolf.ui.region.MyPlaceSettingActivity
+import com.bavuchoko.jsparkgolf.component.main.game.GameSearchButtonHandler
 import com.bavuchoko.jsparkgolf.viewmodel.GameViewModel
 import com.bavuchoko.jsparkgolf.viewmodel.UserViewModel
 import com.bavuchoko.jsparkgolf.viewmodel.factory.GameViewModelFactory
@@ -58,6 +56,7 @@ class GameFragment : Fragment() {
     private var page: Int = 0
     private var size: Int = 10
     private lateinit var userViewModel: UserViewModel
+    private lateinit var gameAnimator: GameAnimator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,7 +89,13 @@ class GameFragment : Fragment() {
 
         gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
 
+        // ArrowAnimator 초기화
+        gameAnimator = GameAnimator(arrowUp)
+
         // 버튼 클릭 리스너 추가
+        val buttonHandler = GameSearchButtonHandler(requireContext(), gameViewModel, btnSearchOpen, btnSearchPlaying, btnSearchClose, btnSearchPlayer)
+        buttonHandler.setupButtonListeners()
+
 
         btnMyPlaceSetting.setOnClickListener {
             val intent = Intent(requireContext(), MyPlaceSettingActivity::class.java)
@@ -102,31 +107,6 @@ class GameFragment : Fragment() {
             startActivity(intent)
         }
 
-
-        //대기중 버튼
-        btnSearchOpen.setOnClickListener {
-            gameViewModel.status = "OPEN"
-            updateButtonStyles()
-            gameViewModel.getList(0, 10)
-        }
-        //진행중 버튼
-        btnSearchPlaying.setOnClickListener {
-            gameViewModel.status = "PLAYING"
-            updateButtonStyles()
-            gameViewModel.getList(0, 10)
-        }
-        //종료됨 버튼
-        btnSearchClose.setOnClickListener {
-            gameViewModel.status = "CLOSED"
-            updateButtonStyles()
-            gameViewModel.getList(0, 10)
-        }
-        //내 경기 버튼
-        btnSearchPlayer.setOnClickListener {
-            gameViewModel.player = !gameViewModel.player
-            updateButtonStyles()
-            gameViewModel.getList(0, 10)
-        }
 
         val jwtCity: String? = CommonMethod.getStoredValue(requireContext(), "region");
         region = jwtCity
@@ -192,7 +172,7 @@ class GameFragment : Fragment() {
             nestedScrollView.visibility = View.GONE
             noDataNotice.visibility = View.GONE
             nullMyPlace.visibility = View.VISIBLE
-            arrowUpAnim();
+            gameAnimator.startAnimation();
         }
     }
 
@@ -223,16 +203,8 @@ class GameFragment : Fragment() {
             btnMyPlace.text= city
         }
     }
-    
 
-    private fun arrowUpAnim(){
-        val animator = ObjectAnimator.ofFloat(arrowUp, "translationY", 0f, 30f)
-        animator.setDuration(500) // 0.5초 동안 이동
-        animator.interpolator = LinearInterpolator()
-        animator.repeatMode = ValueAnimator.REVERSE // 위-아래 반복
-        animator.repeatCount = ValueAnimator.INFINITE // 무한 반복
-        animator.start()
-    }
+
 
 
     override fun onResume() {
@@ -251,5 +223,10 @@ class GameFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         Log.d("GameFragment", "onStart() 호출됨!")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        gameAnimator.stopAnimation() // 애니메이션 중지
     }
 }
