@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -203,13 +204,18 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/board_write"
+        android:id="@+id/btn_create_game"
         android:layout_width="98dp"
         android:layout_height="103dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="110dp"
+        android:backgroundTint="@color/app_color"
+        app:tint="@color/white"
+        android:text="게임 만들기"
+        app:rippleColor="@color/app_color_ripple"
+        app:shapeAppearanceOverlay="?attr/shapeAppearanceCornerExtraLarge"
         android:src="@drawable/baseline_add_24" >
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

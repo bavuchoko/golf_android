@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- 빠른 시작 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_charlie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/thunder"
+        android:visibility="gone"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="180dp"
+        app:backgroundTint="@color/white" />
+
+    <!-- 경기 생성 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_alex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/new_doc"
+        android:visibility="gone"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="120dp"
+        app:backgroundTint="@color/white" />
+
+
+    <!-- 메인 FAB 버튼 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_add_24"
+        android:layout_alignParentEnd="true"
+        app:backgroundTint="@color/app_color_ripple" />
+
+</RelativeLayout>
