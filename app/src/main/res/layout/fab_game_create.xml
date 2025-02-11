@@ -1,32 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 🔥 전체 화면을 덮는 회색 배경 -->
+    <View
+        android:id="@+id/modal_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:alpha="0.6"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true" />
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <!-- 빠른 시작 -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_charlie"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/fab_container"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/thunder"
-        android:visibility="gone"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="180dp"
-        app:backgroundTint="@color/white" />
+        android:layout_alignEnd="@id/fab_main"
+        android:layout_above="@id/fab_main"
+        android:orientation="vertical"
+        android:background="@drawable/rectangle_background"
+        android:padding="16dp"
+        android:layout_marginBottom="20dp"
+        android:visibility="visible">
 
-    <!-- 경기 생성 -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_alex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/new_doc"
-        android:visibility="gone"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="120dp"
-        app:backgroundTint="@color/white" />
+        <!-- 빠른 시작 -->
+        <LinearLayout
+            android:id="@+id/fab_quick_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/thunder" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="빠른시작"/>
+        </LinearLayout>
 
+        <!-- 경기 생성 -->
+        <LinearLayout
+            android:id="@+id/fab_create_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:padding="4dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/play" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="경기생성"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fab_game_bottom"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="70dp"
+        android:orientation="horizontal" />
 
     <!-- 메인 FAB 버튼 -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -35,6 +87,10 @@
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_add_24"
         android:layout_alignParentEnd="true"
-        app:backgroundTint="@color/app_color_ripple" />
+        android:layout_marginBottom="20dp"
+        app:shapeAppearanceOverlay="?attr/shapeAppearanceCornerExtraLarge"
+        app:rippleColor="@android:color/transparent"
+        android:layout_above="@id/fab_game_bottom"/>
 
 </RelativeLayout>
+</FrameLayout>
