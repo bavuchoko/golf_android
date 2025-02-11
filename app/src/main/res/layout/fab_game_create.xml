@@ -72,13 +72,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/fab_game_bottom"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_height="70dp"
-        android:orientation="horizontal" />
 
     <!-- 메인 FAB 버튼 -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -87,10 +80,10 @@
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_add_24"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
         app:shapeAppearanceOverlay="?attr/shapeAppearanceCornerExtraLarge"
         app:rippleColor="@android:color/transparent"
-        android:layout_above="@id/fab_game_bottom"/>
+        />
 
 </RelativeLayout>
 </FrameLayout>
