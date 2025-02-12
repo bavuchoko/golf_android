@@ -35,6 +35,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.region.MyPlaceSettingActivity" android:exported="false"/>
+        <activity android:name=".ui.game.create.GameCreateActivity" android:exported="false"/>
+        <activity android:name=".ui.game.view.GameViewActivity" android:exported="false"/>
     </application>
 
 </manifest>

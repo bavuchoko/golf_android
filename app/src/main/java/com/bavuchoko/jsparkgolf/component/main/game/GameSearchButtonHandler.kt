@@ -3,6 +3,7 @@ package com.bavuchoko.jsparkgolf.component.main.game
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.bavuchoko.jsparkgolf.R
+import com.bavuchoko.jsparkgolf.ui.game.create.GameCreateActivity
 import com.bavuchoko.jsparkgolf.viewmodel.GameViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -62,6 +64,11 @@ class GameSearchButtonHandler(
             gameViewModel.player = !gameViewModel.player
             updateButtonStyles()
             gameViewModel.getList(0, 10)
+        }
+
+        fabCreate.setOnClickListener {
+            val intent = Intent(context, GameCreateActivity::class.java)
+            context.startActivity(intent)
         }
 
         fabMain.setOnClickListener {
