@@ -67,6 +67,7 @@ class GameSearchButtonHandler(
         }
 
         fabCreate.setOnClickListener {
+            closeFabMenu()
             val intent = Intent(context, GameCreateActivity::class.java)
             context.startActivity(intent)
         }
