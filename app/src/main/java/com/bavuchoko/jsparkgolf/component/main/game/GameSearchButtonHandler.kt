@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.bavuchoko.jsparkgolf.R
 import com.bavuchoko.jsparkgolf.ui.game.create.GameCreateActivity
+import com.bavuchoko.jsparkgolf.ui.game.create.QuickCreateActivity
 import com.bavuchoko.jsparkgolf.viewmodel.GameViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -69,6 +70,12 @@ class GameSearchButtonHandler(
         fabCreate.setOnClickListener {
             closeFabMenu()
             val intent = Intent(context, GameCreateActivity::class.java)
+            context.startActivity(intent)
+        }
+
+        fabQuick.setOnClickListener {
+            closeFabMenu()
+            val intent = Intent(context, QuickCreateActivity::class.java)
             context.startActivity(intent)
         }
 
