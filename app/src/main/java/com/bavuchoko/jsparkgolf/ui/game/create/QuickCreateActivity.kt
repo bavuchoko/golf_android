@@ -2,12 +2,10 @@ package com.bavuchoko.jsparkgolf.ui.game.create
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
-import android.view.animation.AnimationUtils
-import android.view.animation.BounceInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import android.view.inputmethod.InputMethodManager
@@ -18,7 +16,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.bavuchoko.jsparkgolf.R
 import com.bavuchoko.jsparkgolf.component.game.create.GameCreateButtonHandler
 
@@ -26,9 +23,11 @@ class QuickCreateActivity : AppCompatActivity()  {
 
     private lateinit var btnBack: Button
     private lateinit var companionPanel: TextView
+    private lateinit var tempUserText: TextView
     private lateinit var inputCompanion : EditText
     private lateinit var tempUserContainer: LinearLayout
     private lateinit var btnCreate: TextView
+    private var test: Int = 0
 
     private var creattable: Boolean = false         // 시작하기 버튼 클릭 가능여부
 
@@ -40,6 +39,7 @@ class QuickCreateActivity : AppCompatActivity()  {
 
         btnBack = findViewById(R.id.btn_back)
         btnCreate = findViewById(R.id.btn_create)
+        tempUserText = findViewById(R.id.temp_user_text)
 
         companionPanel = findViewById(R.id.panel_input_companion)
         inputCompanion = findViewById(R.id.input_companion)
@@ -87,12 +87,15 @@ class QuickCreateActivity : AppCompatActivity()  {
     }
 
     private fun validateInput(input: String) {
+
         if (input.isNotEmpty()) {
             try {
                 val number = input.toInt()
                 var players = number
                 if (number > 3) {
-                    Toast.makeText(this,"동반자는 최대 3명 입니다.", Toast.LENGTH_SHORT).show()
+                    val toast = Toast.makeText(this, "동반자는 최대 3명 입니다.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.TOP, 0, 10)
+                    toast.show()
                     inputCompanion.setText("3")
                     inputCompanion.setSelection(inputCompanion.length())
                     players = 3
@@ -111,16 +114,73 @@ class QuickCreateActivity : AppCompatActivity()  {
 
     private fun addDynamicEditTexts(count: Int) {
         checkCreatBtn(true)
-        tempUserContainer.removeAllViews()
+        val currentChildCount = if (test == 0) tempUserContainer.childCount else test
+        test = count
 
         val inflater = layoutInflater
 
-        for (i in 1..count) {
-            val editTextView = inflater.inflate(R.layout.temp_user_name, tempUserContainer, false) as EditText
-            editTextView.hint = "동반자 ${i} 이름 입력"
-            tempUserContainer.addView(editTextView)
+        if (count > currentChildCount) {
+            if (tempUserText.visibility == View.GONE) {
+                tempUserText.visibility = View.VISIBLE
+                tempUserText.translationY = 50f
+                tempUserText.alpha = 0f
+                tempUserText.animate()
+                    .translationY(0f)
+                    .alpha(1f)
+                    .setDuration(300)
+                    .setStartDelay(50)
+                    .setInterpolator(DecelerateInterpolator())
+                    .withEndAction {
+                        for (i in currentChildCount until count) {
+                            val editTextView = inflater.inflate(R.layout.temp_user_name, tempUserContainer, false) as EditText
+                            editTextView.hint = "동반자 ${i + 1} 이름 입력"
+
+                            editTextView.translationX = -tempUserContainer.width.toFloat()
+                            tempUserContainer.addView(editTextView)
+
+                            editTextView.animate()
+                                .translationX(0f)
+                                .setDuration(300)
+                                .setStartDelay(100 * (i + 1).toLong())
+                                .setInterpolator(OvershootInterpolator())
+                                .start()
+                        }
+                    }
+                    .start()
+            } else {
+                // tempUserText가 이미 VISIBLE이면 editTextView 애니메이션을 바로 시작
+                for (i in currentChildCount until count) {
+                    val editTextView = inflater.inflate(R.layout.temp_user_name, tempUserContainer, false) as EditText
+                    editTextView.hint = "동반자 ${i + 1} 이름 입력"
+
+                    editTextView.translationX = -tempUserContainer.width.toFloat()
+                    tempUserContainer.addView(editTextView)
+
+                    editTextView.animate()
+                        .translationX(0f)
+                        .setDuration(300)
+                        .setStartDelay(100 * (i + 1).toLong())
+                        .setInterpolator(OvershootInterpolator())
+                        .start()
+                }
+            }
+        } else if (count < currentChildCount) {
+            val excessCount = currentChildCount - count
+            for (i in 0 until excessCount) {
+                val child = tempUserContainer.getChildAt(tempUserContainer.childCount - 1 - i)
+                child.animate()
+                    .translationX(-tempUserContainer.width.toFloat())
+                    .setDuration(600)
+                    .setStartDelay(150 * i.toLong())
+                    .withEndAction {
+                        tempUserContainer.removeView(child)
+                    }
+                    .start()
+            }
         }
     }
+
+
 
     private fun checkCreatBtn(value: Boolean) {
         if(value){
