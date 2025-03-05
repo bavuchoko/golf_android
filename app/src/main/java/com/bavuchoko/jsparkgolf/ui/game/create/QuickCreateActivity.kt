@@ -30,6 +30,8 @@ class QuickCreateActivity : AppCompatActivity()  {
     private lateinit var tempUserContainer: LinearLayout
     private lateinit var btnCreate: TextView
 
+    private var creattable: Boolean = false         // 시작하기 버튼 클릭 가능여부
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -108,8 +110,7 @@ class QuickCreateActivity : AppCompatActivity()  {
     }
 
     private fun addDynamicEditTexts(count: Int) {
-        btnCreate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
-        btnCreate.setTextColor(resources.getColor(R.color.blue))
+        checkCreatBtn(true)
         tempUserContainer.removeAllViews()
 
         val inflater = layoutInflater
@@ -119,6 +120,19 @@ class QuickCreateActivity : AppCompatActivity()  {
             editTextView.hint = "동반자 ${i} 이름 입력"
             tempUserContainer.addView(editTextView)
         }
+    }
+
+    private fun checkCreatBtn(value: Boolean) {
+        if(value){
+            btnCreate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+            btnCreate.setTextColor(resources.getColor(R.color.blue))
+            creattable = true
+        }else{
+            btnCreate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+            btnCreate.setTextColor(resources.getColor(R.color.gray))
+            creattable = false
+        }
+
     }
 
 
