@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:id="@+id/game_create_top_bar"
-        android:paddingLeft="16dp"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:paddingBottom="10dp"
@@ -24,6 +24,28 @@
             android:background="@android:color/transparent"
             android:visibility="visible"
             android:drawableStart="@drawable/baseline_arrow_back_ios_24"
+            android:drawablePadding="4dp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/btn_create"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            android:lineHeight="25sp"
+            android:textSize="12sp"
+
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+            android:text="시작하기"
             android:drawablePadding="4dp"/>
 
     </LinearLayout>
@@ -59,6 +81,17 @@
             android:textSize="40sp"
             android:inputType="number"
             android:visibility="gone" />
+
+
+
+            <LinearLayout
+                android:id="@+id/temp_user_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+            </LinearLayout>
 
         </LinearLayout>
 
