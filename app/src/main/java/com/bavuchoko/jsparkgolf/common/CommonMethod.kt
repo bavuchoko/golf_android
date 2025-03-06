@@ -3,6 +3,7 @@ package com.bavuchoko.jsparkgolf.common
 import android.content.Context
 import android.content.SharedPreferences
 import com.auth0.android.jwt.JWT
+import com.bavuchoko.jsparkgolf.vo.Sido
 
 object CommonMethod {
 
@@ -61,5 +62,11 @@ object CommonMethod {
         val editor: SharedPreferences.Editor = preference.edit()
         editor.remove(key)
         editor.apply()
+    }
+
+    fun getRegionCode(context: Context): String? {
+        val preference: SharedPreferences = context.getSharedPreferences(PREFERENCES_ALIAS, Context.MODE_PRIVATE)
+        val region = preference.getString("region", null)
+        return region?.let { Sido.getNumberByName(region) }
     }
 }

@@ -1,6 +1,9 @@
 package com.bavuchoko.jsparkgolf.vo
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class GameVo (
    val id: Int,
    val competition: CompetitionVo?,
@@ -10,4 +13,4 @@ data class GameVo (
    val finishDate: String?,
    val progress: ProgressVo,
    val players: List<UserVo>
-)
+): Parcelable

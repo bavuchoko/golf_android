@@ -1,5 +1,6 @@
 package com.bavuchoko.jsparkgolf.ui.game.create
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,10 +17,26 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bavuchoko.jsparkgolf.R
+import com.bavuchoko.jsparkgolf.common.CommonMethod
 import com.bavuchoko.jsparkgolf.component.game.create.GameCreateButtonHandler
+import com.bavuchoko.jsparkgolf.dto.request.QuickGameRequestDto
+import com.bavuchoko.jsparkgolf.network.RetrofitFactory
+import com.bavuchoko.jsparkgolf.repository.GameRepository
+import com.bavuchoko.jsparkgolf.repository.UserRepository
+import com.bavuchoko.jsparkgolf.service.GameApiService
+import com.bavuchoko.jsparkgolf.service.UserApiService
+import com.bavuchoko.jsparkgolf.ui.game.view.GameViewActivity
+import com.bavuchoko.jsparkgolf.viewmodel.GameViewModel
+import com.bavuchoko.jsparkgolf.viewmodel.UserViewModel
+import com.bavuchoko.jsparkgolf.viewmodel.factory.GameViewModelFactory
+import com.bavuchoko.jsparkgolf.viewmodel.factory.UserViewModelFactory
 
 class QuickCreateActivity : AppCompatActivity()  {
+
+    private lateinit var gameViewModel: GameViewModel
 
     private lateinit var btnBack: Button
     private lateinit var companionPanel: TextView
@@ -28,7 +45,8 @@ class QuickCreateActivity : AppCompatActivity()  {
     private lateinit var tempUserContainer: LinearLayout
     private lateinit var btnCreate: TextView
     private var test: Int = 0
-
+    private lateinit var userViewModel: UserViewModel
+    private var tempUserNames: Array<String> = arrayOf()
     private var creattable: Boolean = false         // 시작하기 버튼 클릭 가능여부
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +54,10 @@ class QuickCreateActivity : AppCompatActivity()  {
         enableEdgeToEdge()
         setContentView(R.layout.activity_quick_create)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        // ViewModel 초기화
+        val gameService = RetrofitFactory.create(this).create(GameApiService::class.java)
+        val gameRepository = GameRepository(gameService)
+        gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
 
         btnBack = findViewById(R.id.btn_back)
         btnCreate = findViewById(R.id.btn_create)
@@ -44,6 +66,11 @@ class QuickCreateActivity : AppCompatActivity()  {
         companionPanel = findViewById(R.id.panel_input_companion)
         inputCompanion = findViewById(R.id.input_companion)
         tempUserContainer = findViewById(R.id.temp_user_container)
+
+
+        btnCreate.setOnClickListener {
+            doQuickStart()
+        }
 
         companionPanel.scaleX = 0.5f
         companionPanel.scaleY = 0.5f
@@ -84,6 +111,25 @@ class QuickCreateActivity : AppCompatActivity()  {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+
+        val userApiService = RetrofitFactory.create(this).create(UserApiService::class.java)
+        val userRepository = UserRepository(userApiService, this)
+        userViewModel = ViewModelProvider(this, UserViewModelFactory(userRepository)).get(UserViewModel::class.java)
+
+        gameViewModel.gameView.observe(this, Observer { gameVo ->
+            gameVo?.let {
+                val intent = Intent(this, GameViewActivity::class.java)
+                intent.putExtra("gameVo", it)
+                startActivity(intent)
+            }
+        })
+
+        // 오류 처리
+        gameViewModel.error.observe(this, Observer { error ->
+            error?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun validateInput(input: String) {
@@ -110,6 +156,19 @@ class QuickCreateActivity : AppCompatActivity()  {
                 inputCompanion.setText("")
             }
         }
+    }
+
+    private fun checkCreatBtn(value: Boolean) {
+        if(value){
+            btnCreate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+            btnCreate.setTextColor(resources.getColor(R.color.blue))
+            creattable = true
+        }else{
+            btnCreate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+            btnCreate.setTextColor(resources.getColor(R.color.gray))
+            creattable = false
+        }
+
     }
 
     private fun addDynamicEditTexts(count: Int) {
@@ -148,7 +207,6 @@ class QuickCreateActivity : AppCompatActivity()  {
                     }
                     .start()
             } else {
-                // tempUserText가 이미 VISIBLE이면 editTextView 애니메이션을 바로 시작
                 for (i in currentChildCount until count) {
                     val editTextView = inflater.inflate(R.layout.temp_user_name, tempUserContainer, false) as EditText
                     editTextView.hint = "동반자 ${i + 1} 이름 입력"
@@ -182,17 +240,26 @@ class QuickCreateActivity : AppCompatActivity()  {
 
 
 
-    private fun checkCreatBtn(value: Boolean) {
-        if(value){
-            btnCreate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
-            btnCreate.setTextColor(resources.getColor(R.color.blue))
-            creattable = true
-        }else{
-            btnCreate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
-            btnCreate.setTextColor(resources.getColor(R.color.gray))
-            creattable = false
-        }
 
+
+    private fun doQuickStart() {
+        if (creattable) {
+            val regionCode: String? = CommonMethod.getRegionCode(this);
+
+            val userNames = mutableListOf<String>()
+
+            for (i in 0 until tempUserContainer.childCount) {
+                val childView = tempUserContainer.getChildAt(i)
+                if (childView is EditText) {
+                    var userName = childView.text.toString()
+                    if(userName.isEmpty()) userName = "동반_"+i
+                    userNames.add(userName)
+                }
+            }
+            val quickGameRequestDto = QuickGameRequestDto(null, regionCode, userNames.toTypedArray());
+            gameViewModel.quickStartGame(quickGameRequestDto)
+
+        }
     }
 
 

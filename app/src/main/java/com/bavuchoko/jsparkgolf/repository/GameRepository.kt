@@ -1,5 +1,6 @@
 package com.bavuchoko.jsparkgolf.repository
 
+import com.bavuchoko.jsparkgolf.dto.request.QuickGameRequestDto
 import com.bavuchoko.jsparkgolf.service.GameApiService
 import com.bavuchoko.jsparkgolf.vo.GameVo
 import java.net.URLEncoder
@@ -19,5 +20,20 @@ class GameRepository(private val apiService: GameApiService) {
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+
+    suspend fun quickStartGame(request: QuickGameRequestDto) : Result<GameVo> {
+        return try {
+            val response = apiService.quickStartGame(request)
+            if (response.isSuccessful) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(Exception("시작 실패"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+
     }
 }
