@@ -70,10 +70,13 @@ class GameRecyclerAdapter(
         private val playTime: TextView = view.findViewById(R.id.play_time)
         private val fieldName: TextView = view.findViewById(R.id.field_name)
         private val progressNow: TextView = view.findViewById(R.id.progress_now)
+        private val companionCount: TextView = view.findViewById(R.id.companion_count)
 
         fun bind(game: GameVo, clickListener: OnItemClickListener) {
-            host_name_player.text = if (game.players.size > 1) "${game.host.name} +${game.players.size}" else " "
-            playTime.text = game.playDate
+            val hasCompanion : Boolean = if (game.players.size > 1) true else false
+            host_name_player.text = "${game.host.name}"
+            companionCount.text =if(hasCompanion) "${game.players.size}" else "1"
+            playTime.text = game.playDate.substring(11)
             progressNow.text = "${game.progress.half}C : ${game.progress.hole}H"
 
             itemView.setOnClickListener {
