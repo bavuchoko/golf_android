@@ -42,4 +42,17 @@ class GameViewModel(private val gameRepository: GameRepository): ViewModel() {
             }
         }
     }
+
+
+    fun getGameById(gameId: Long) {
+        viewModelScope.launch {
+            val response = gameRepository.getGameById(gameId)
+            if (response.isSuccess) {
+                val gameVo = response.getOrNull()
+                _gameVo.value = gameVo
+            } else {
+                _error.value = response.exceptionOrNull()?.message
+            }
+        }
+    }
 }

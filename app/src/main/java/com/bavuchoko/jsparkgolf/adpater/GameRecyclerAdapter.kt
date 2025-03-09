@@ -1,5 +1,6 @@
 package com.bavuchoko.jsparkgolf.adpater
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ class GameRecyclerAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick(url: String)
+        fun onItemClick(id: Long)
     }
 
     companion object {
@@ -60,6 +61,7 @@ class GameRecyclerAdapter(
     inner class DateViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val dateTextView: TextView = view.findViewById(R.id.dateTextView)
 
+        @SuppressLint("SetTextI18n")
         fun bind(date: String) {
             dateTextView.text = date.substring(5,7) +"월 "+date.substring(8,10) +"일"
         }
@@ -72,15 +74,16 @@ class GameRecyclerAdapter(
         private val progressNow: TextView = view.findViewById(R.id.progress_now)
         private val companionCount: TextView = view.findViewById(R.id.companion_count)
 
+        @SuppressLint("SetTextI18n")
         fun bind(game: GameVo, clickListener: OnItemClickListener) {
             val hasCompanion : Boolean = if (game.players.size > 1) true else false
-            host_name_player.text = "${game.host.name}"
+            host_name_player.text = game.host.name
             companionCount.text =if(hasCompanion) "${game.players.size}" else "1"
             playTime.text = game.playDate.substring(11)
             progressNow.text = "${game.progress.half}C : ${game.progress.hole}H"
 
             itemView.setOnClickListener {
-
+                clickListener.onItemClick(game.id)
             }
         }
     }

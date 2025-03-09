@@ -7,9 +7,14 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GameApiService {
+
+    @GET("game/{id}")
+    suspend fun getGameById(@Path("id") gameId: Long) : Response<GameVo>
+
     @GET("game")
     suspend fun getGameList(
         @Query("page") page: Int,

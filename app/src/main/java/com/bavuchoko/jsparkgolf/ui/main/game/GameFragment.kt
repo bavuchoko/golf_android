@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -30,7 +28,7 @@ import com.bavuchoko.jsparkgolf.repository.GameRepository
 import com.bavuchoko.jsparkgolf.repository.UserRepository
 import com.bavuchoko.jsparkgolf.service.GameApiService
 import com.bavuchoko.jsparkgolf.service.UserApiService
-import com.bavuchoko.jsparkgolf.ui.main.MainActivity
+import com.bavuchoko.jsparkgolf.ui.game.view.GameViewActivity
 import com.bavuchoko.jsparkgolf.ui.region.MyPlaceSettingActivity
 import com.bavuchoko.jsparkgolf.viewmodel.GameViewModel
 import com.bavuchoko.jsparkgolf.viewmodel.UserViewModel
@@ -146,7 +144,16 @@ class GameFragment : Fragment() {
             }
         })
 
-
+        gameViewModel.gameView.observe(viewLifecycleOwner) { game ->
+            if (game != null) {
+                val intent = Intent(requireContext(), GameViewActivity::class.java).apply {
+                    putExtra("game", game)
+                }
+                startActivity(intent)
+            } else {
+                Log.e("GameFragment", "Failed to fetch game details")
+            }
+        }
 
     }
 
@@ -165,9 +172,8 @@ class GameFragment : Fragment() {
                     gameAdapter = GameRecyclerAdapter(
                         groupedGames,
                         object : GameRecyclerAdapter.OnItemClickListener {
-                            override fun onItemClick(url: String) {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                                startActivity(intent)
+                            override fun onItemClick(id: Long) {
+                                gameViewModel.getGameById(id)
                             }
                         })
                     recyclerView.adapter = gameAdapter
