@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GameVo (
-   val id: Int,
+   val id: Long,
    val competition: CompetitionVo?,
    val host: UserVo,
    val fields: FieldsVo,
