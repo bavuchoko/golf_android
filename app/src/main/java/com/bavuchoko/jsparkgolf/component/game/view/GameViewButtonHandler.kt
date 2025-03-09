@@ -1,7 +1,9 @@
 package com.bavuchoko.jsparkgolf.component.game.view
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Button
+import com.bavuchoko.jsparkgolf.ui.main.MainActivity
 
 class GameViewButtonHandler(
     private val context: Context,
@@ -11,10 +13,9 @@ class GameViewButtonHandler(
     fun setupButtonListeners() {
 
         btnBack.setOnClickListener {
-            if (context is android.app.Activity) {
-                context.finish()
-            }
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
         }
-
     }
+
 }
