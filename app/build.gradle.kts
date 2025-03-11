@@ -57,4 +57,5 @@ dependencies {
     implementation(libs.jwtdecode)
     // ViewModelScope
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.gridlayout)
 }
