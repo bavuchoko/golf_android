@@ -81,7 +81,7 @@ class GameRecyclerAdapter(
             companionCount.text =if(hasCompanion) "${game.players.size}" else "1"
             playTime.text = game.playDate.substring(11)
             progressNow.text = "${game.progress.half}C : ${game.progress.hole}H"
-
+            fieldName.text = game.fields.name
             itemView.setOnClickListener {
                 clickListener.onItemClick(game.id)
             }
