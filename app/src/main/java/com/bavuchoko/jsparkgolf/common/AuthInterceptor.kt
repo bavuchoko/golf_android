@@ -29,7 +29,7 @@ class AuthInterceptor(
 
         if (!response.isSuccessful && response.code() == 401) {
             // 토큰 갱신 시도
-            val refreshToken = CommonMethod.getValue(context, "refreshToken") ?: ""
+            val refreshToken = CommonMethod.getStoredValue(context, "refreshToken") ?: ""
             val newToken = runBlocking {
                 try {
                     val refreshRequest = request.newBuilder()
