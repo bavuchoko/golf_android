@@ -80,7 +80,6 @@ class ActionFragment : Fragment() {
             } else {
                 loading.disappear()
                 showErrorDialog("네트워크 에러가 발생하였습니다\n관리자에게 문의하세요.")
-//                Toast.makeText(context, "네트워크 에러로 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 

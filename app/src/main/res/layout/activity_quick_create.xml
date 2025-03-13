@@ -17,14 +17,13 @@
 
         <android.widget.Button
             android:id="@+id/btn_back"
-            android:layout_width="40dp"
+            android:layout_width="41dp"
             android:layout_height="25dp"
             android:layout_gravity="bottom"
-            android:layout_marginLeft="10dp"
             android:background="@android:color/transparent"
-            android:visibility="visible"
             android:drawableStart="@drawable/baseline_arrow_back_ios_24"
-            android:drawablePadding="4dp"/>
+            android:drawablePadding="4dp"
+            android:visibility="visible" />
 
         <View
             android:layout_width="0dp"
@@ -35,7 +34,6 @@
             android:id="@+id/btn_create"
             android:layout_width="70dp"
             android:layout_height="25dp"
-            android:layout_marginRight="10dp"
             android:gravity="center"
             android:textColor="@color/gray"
             android:textStyle="bold"
