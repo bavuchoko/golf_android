@@ -9,7 +9,7 @@
         android:id="@+id/game_create_top_bar"
         android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:paddingBottom="10dp"
         android:background="@android:color/transparent"
         android:orientation="horizontal">
@@ -38,8 +38,7 @@
             android:textColor="@color/gray"
             android:textStyle="bold"
             android:lineHeight="25sp"
-            android:textSize="12sp"
-
+            android:textSize="13sp"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
             android:visibility="visible"

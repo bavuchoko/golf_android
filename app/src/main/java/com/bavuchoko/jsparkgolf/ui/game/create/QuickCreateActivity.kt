@@ -83,7 +83,7 @@ class QuickCreateActivity : AppCompatActivity()  {
             .withEndAction {
                 companionPanel.postDelayed({
                     inputCompanion.visibility = View.VISIBLE
-                    inputCompanion.translationY = 50f
+                    inputCompanion.translationY = 70f
                     inputCompanion.alpha = 0f
                     inputCompanion.animate()
                     .translationY(0f)
