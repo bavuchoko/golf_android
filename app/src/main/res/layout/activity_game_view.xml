@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            app:tabTextColor="@color/dee_gray"
+            app:tabTextColor="@color/deep_gray"
             app:tabSelectedTextColor="@color/app_color"
             app:tabIndicatorColor="@color/app_color"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -36,7 +36,7 @@
             android:layout_gravity="bottom"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/dee_gray" />
+            android:textColor="@color/deep_gray" />
 
         <android.widget.Button
             android:id="@+id/log_out_btn"
@@ -48,7 +48,7 @@
             android:text="로그아웃"
             android:textSize="12sp"
             android:background="@drawable/logout_button_background"
-            android:textColor="@color/dee_gray"
+            android:textColor="@color/deep_gray"
             android:textStyle="bold" />
 
     </LinearLayout>

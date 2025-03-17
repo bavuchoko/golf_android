@@ -95,7 +95,7 @@ class GameSearchButtonHandler(
         val selectedBg = ContextCompat.getDrawable(context, R.color.app_color)
         val defaultBg = ContextCompat.getDrawable(context, R.drawable.btn_un_selected_basic)
         val selectedTextColor = ContextCompat.getColor(context, android.R.color.white)
-        val defaultTextColor = ContextCompat.getColor(context, R.color.dee_gray)
+        val defaultTextColor = ContextCompat.getColor(context, R.color.deep_gray)
 
         btnSearchOpen.background = if (gameViewModel.status == "OPEN") selectedBg else defaultBg
         btnSearchOpen.setTextColor(if (gameViewModel.status == "OPEN") selectedTextColor else defaultTextColor)
