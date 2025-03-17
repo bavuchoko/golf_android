@@ -19,6 +19,7 @@ class GameViewActivity : AppCompatActivity()  {
     private lateinit var btnBack: Button
     private lateinit var tabLayout: TabLayout
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
