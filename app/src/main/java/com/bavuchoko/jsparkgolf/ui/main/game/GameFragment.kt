@@ -144,16 +144,6 @@ class GameFragment : Fragment() {
             }
         })
 
-        gameViewModel.gameView.observe(viewLifecycleOwner) { game ->
-            if (game != null) {
-                val intent = Intent(requireContext(), GameViewActivity::class.java).apply {
-                    putExtra("game", game)
-                }
-                startActivity(intent)
-            } else {
-                Log.e("GameFragment", "Failed to fetch game details")
-            }
-        }
 
     }
 
@@ -173,7 +163,10 @@ class GameFragment : Fragment() {
                         groupedGames,
                         object : GameRecyclerAdapter.OnItemClickListener {
                             override fun onItemClick(id: Long) {
-                                gameViewModel.getGameById(id)
+                                val intent = Intent(requireContext(), GameViewActivity::class.java).apply {
+                                    putExtra("gameId", id)
+                                }
+                                startActivity(intent)
                             }
                         })
                     recyclerView.adapter = gameAdapter

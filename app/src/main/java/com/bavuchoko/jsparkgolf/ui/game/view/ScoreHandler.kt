@@ -17,6 +17,8 @@ class ScoreHandler  @JvmOverloads constructor(
 
     init {
         LayoutInflater.from(context).inflate(R.layout.score_input_handler, this, true)
+        cardElevation = 0f
+
         scoreText = findViewById(R.id.scoreText)
         val upperTouch = findViewById<View>(R.id.upperTouch)
         val lowerTouch = findViewById<View>(R.id.lowerTouch)
