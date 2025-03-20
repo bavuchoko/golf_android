@@ -162,9 +162,38 @@ class GameFragment : Fragment() {
                     gameAdapter = GameRecyclerAdapter(
                         groupedGames,
                         object : GameRecyclerAdapter.OnItemClickListener {
-                            override fun onItemClick(id: Long) {
-                                val intent = Intent(requireContext(), GameViewActivity::class.java).apply {
-                                    putExtra("gameId", id)
+                            override fun onItemClick(id: Long, state: String ) {
+                                val intent: Intent = when (state) {
+                                    "OPEN" -> {
+                                        Intent(requireContext(), GameViewActivity::class.java).apply {
+                                            putExtra("gameId", id)
+                                            putExtra("gameState", state)
+                                        }
+                                    }
+                                    "PLAYING" -> {
+                                        Intent(requireContext(), GameViewActivity::class.java).apply {
+                                            putExtra("gameId", id)
+                                            putExtra("gameState", state)
+                                        }
+                                    }
+                                    "CLOSE" -> {
+                                        Intent(requireContext(), GameViewActivity::class.java).apply {
+                                            putExtra("gameId", id)
+                                            putExtra("gameState", state)
+                                        }
+                                    }
+                                    "END" -> {
+                                        Intent(requireContext(), GameViewActivity::class.java).apply {
+                                            putExtra("gameId", id)
+                                            putExtra("gameState", state)
+                                        }
+                                    }
+                                    else -> {
+                                        Intent(requireContext(), GameViewActivity::class.java).apply {
+                                            putExtra("gameId", id)
+                                            putExtra("gameState", state)
+                                        }
+                                    }
                                 }
                                 startActivity(intent)
                             }

@@ -15,7 +15,7 @@ class GameRecyclerAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick(id: Long)
+        fun onItemClick(id: Long, state: String)
     }
 
     companion object {
@@ -83,7 +83,7 @@ class GameRecyclerAdapter(
             progressNow.text = "${game.progress.half}C : ${game.progress.hole}H"
             fieldName.text = game.fields.name
             itemView.setOnClickListener {
-                clickListener.onItemClick(game.id)
+                clickListener.onItemClick(game.id, game.progress.state)
             }
         }
     }
