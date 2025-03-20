@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="light_black">#161716</color>
     <color name="deep_gray">#3C3C3C</color>
     <color name="dark_gray">#8f8f8f</color>
     <color name="app_color">#1D1616</color>
@@ -9,6 +10,7 @@
     <color name="dark_green">#0A7107</color>
     <color name="middle_gray">#f2f2f2</color>
     <color name="light_gray">#95F1F6FB</color>
+    <color name="toast_background">#f8f9fc</color>
     <color name="bright_gray">#F7F8F8</color>
     <color name="light_blue">#DEE7F4</color>
     <color name="light_hot_pink">#F6E9EE</color>

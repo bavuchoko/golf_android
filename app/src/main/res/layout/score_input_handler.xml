@@ -78,21 +78,61 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <!-- 평균 (AVG) 표시 (터치 비활성화) -->
-        <TextView
-            android:id="@+id/avgText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AVG: 4.3 / TOT:  125"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AVG: "
             android:textSize="15sp"
             android:textStyle="italic"
             android:textColor="@color/dark_gray"
             android:gravity="center"
             android:clickable="false"
-            android:focusable="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="12dp"/>
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/avgText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.3"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:textColor="@color/dark_gray"
+            android:gravity="center"
+            android:clickable="false"
+            android:focusable="false" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" / TOT: "
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:textColor="@color/dark_gray"
+            android:gravity="center"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/totText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="125"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:textColor="@color/dark_gray"
+            android:gravity="center"
+            android:clickable="false"
+            android:focusable="false" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
