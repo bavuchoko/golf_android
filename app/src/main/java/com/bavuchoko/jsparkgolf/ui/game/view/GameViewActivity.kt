@@ -13,12 +13,16 @@ import com.bavuchoko.jsparkgolf.common.CommonMethod.getValue
 import com.bavuchoko.jsparkgolf.component.game.view.GameViewButtonHandler
 import com.bavuchoko.jsparkgolf.network.RetrofitFactory
 import com.bavuchoko.jsparkgolf.repository.GameRepository
+import com.bavuchoko.jsparkgolf.repository.ScoreRepository
 import com.bavuchoko.jsparkgolf.service.GameApiService
+import com.bavuchoko.jsparkgolf.service.ScoreService
 import com.bavuchoko.jsparkgolf.ui.game.view.fragment.CurrentRoundFragment
 import com.bavuchoko.jsparkgolf.ui.game.view.fragment.ScoringRoundFragment
 import com.bavuchoko.jsparkgolf.ui.game.view.fragment.TotalScoreFragment
 import com.bavuchoko.jsparkgolf.viewmodel.GameViewModel
+import com.bavuchoko.jsparkgolf.viewmodel.ScoreViewModel
 import com.bavuchoko.jsparkgolf.viewmodel.factory.GameViewModelFactory
+import com.bavuchoko.jsparkgolf.viewmodel.factory.ScoreViewModelFactory
 import com.bavuchoko.jsparkgolf.vo.GameVo
 import com.bavuchoko.jsparkgolf.vo.ScoreVo
 import com.google.android.material.tabs.TabLayout
@@ -28,6 +32,7 @@ class GameViewActivity : AppCompatActivity(), ScoringRoundFragment.ScoreUpdateLi
     private lateinit var btnBack: Button
     private lateinit var tabLayout: TabLayout
     private lateinit var gameViewModel: GameViewModel
+    private lateinit var scoreViewModel: ScoreViewModel
     private lateinit var btnNext: TextView
     private var isHost: Boolean = false
     private var isPlaying: Boolean = false
@@ -56,7 +61,9 @@ class GameViewActivity : AppCompatActivity(), ScoringRoundFragment.ScoreUpdateLi
         btnBack = findViewById(R.id.btn_back)
         tabLayout = findViewById(R.id.tab_layout)
         val gameRepository = GameRepository(RetrofitFactory.create(this).create(GameApiService::class.java))
+        val scoreRepository = ScoreRepository(RetrofitFactory.create(this).create(ScoreService::class.java))
         gameViewModel = ViewModelProvider(this, GameViewModelFactory(gameRepository)).get(GameViewModel::class.java)
+        scoreViewModel = ViewModelProvider(this, ScoreViewModelFactory(scoreRepository)).get(ScoreViewModel::class.java)
     }
 
     private fun setupButtonListeners() {
@@ -64,10 +71,19 @@ class GameViewActivity : AppCompatActivity(), ScoringRoundFragment.ScoreUpdateLi
         buttonHandler.setupButtonListeners()
 
         btnNext.setOnClickListener {
-            checkIfNextable()
             if (nextable) {
-                // 다음 단계로 넘어가는 로직 추가
+                updateGameProgress()
+            }else{
+
             }
+        }
+    }
+
+    private fun updateGameProgress() {
+        if (isPlaying) {
+            scoreViewModel.saveScores(game.id, scoresForSave)
+        } else {
+            Log.d("GameViewActivity", "게임이 진행 중이 아닙니다.")
         }
     }
 
@@ -80,7 +96,7 @@ class GameViewActivity : AppCompatActivity(), ScoringRoundFragment.ScoreUpdateLi
                 if (userId != null && resoponse.host.id == userId) {
                     isHost = true
                 }
-                if(resoponse.progress.state==="PLAYING"){
+                if(resoponse.progress.state =="PLAYING"){
                     isPlaying = true
                 }
 
