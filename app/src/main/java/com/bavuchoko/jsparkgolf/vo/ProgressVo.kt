@@ -11,5 +11,5 @@ data class ProgressVo (
     val half: Int,
     val hole: Int,
     val progressTime: String,
-    val status: String
+    val state: String
 ): Parcelable
