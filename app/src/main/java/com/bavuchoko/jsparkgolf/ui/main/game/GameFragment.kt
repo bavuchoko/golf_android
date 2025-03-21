@@ -29,6 +29,7 @@ import com.bavuchoko.jsparkgolf.repository.UserRepository
 import com.bavuchoko.jsparkgolf.service.GameApiService
 import com.bavuchoko.jsparkgolf.service.UserApiService
 import com.bavuchoko.jsparkgolf.ui.game.view.GameViewActivity
+import com.bavuchoko.jsparkgolf.ui.game.view.GameWaitingActivity
 import com.bavuchoko.jsparkgolf.ui.region.MyPlaceSettingActivity
 import com.bavuchoko.jsparkgolf.viewmodel.GameViewModel
 import com.bavuchoko.jsparkgolf.viewmodel.UserViewModel
@@ -165,7 +166,7 @@ class GameFragment : Fragment() {
                             override fun onItemClick(id: Long, state: String ) {
                                 val intent: Intent = when (state) {
                                     "OPEN" -> {
-                                        Intent(requireContext(), GameViewActivity::class.java).apply {
+                                        Intent(requireContext(), GameWaitingActivity::class.java).apply {
                                             putExtra("gameId", id)
                                             putExtra("gameState", state)
                                         }
