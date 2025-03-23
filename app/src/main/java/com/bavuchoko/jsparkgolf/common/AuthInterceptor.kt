@@ -33,17 +33,18 @@ class AuthInterceptor(
             val newToken = runBlocking {
                 try {
                     val refreshRequest = request.newBuilder()
-                        .url("your_base_url/auth/reissue") // 갱신 엔드포인트로 URL 설정
+                        .url("https://todoro.co.kr/api/auth/reissue") // 갱신 엔드포인트로 URL 설정
                         .addHeader("Cookie", "refreshToken=$refreshToken")
                         .build()
                     val refreshResponse = chain.proceed(refreshRequest)
 
                     if (refreshResponse.isSuccessful) {
-                        refreshResponse.body()
+                        refreshResponse.body()?.string()
                     } else {
                         null // 갱신 실패
                     }
                 } catch (e: Exception) {
+                    e.printStackTrace()
                     null // 예외 발생 시 null 반환
                 }
             }
