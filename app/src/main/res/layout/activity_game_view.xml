@@ -42,9 +42,8 @@
             android:gravity="center"
 
             android:textColor="@color/gray"
-            android:textStyle="bold"
             android:lineHeight="25sp"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
             android:visibility="visible"

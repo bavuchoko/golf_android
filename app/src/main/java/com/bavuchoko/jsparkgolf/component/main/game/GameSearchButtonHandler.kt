@@ -92,7 +92,7 @@ class GameSearchButtonHandler(
     }
 
     fun updateButtonStyles() {
-        val selectedBg = ContextCompat.getDrawable(context, R.color.app_color)
+        val selectedBg = ContextCompat.getDrawable(context, R.drawable.btn_selected_basic)
         val defaultBg = ContextCompat.getDrawable(context, R.drawable.btn_un_selected_basic)
         val selectedTextColor = ContextCompat.getColor(context, android.R.color.white)
         val defaultTextColor = ContextCompat.getColor(context, R.color.deep_gray)
