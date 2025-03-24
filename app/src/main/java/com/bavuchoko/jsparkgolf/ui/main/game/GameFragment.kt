@@ -197,6 +197,8 @@ class GameFragment : Fragment() {
                                     }
                                 }
                                 startActivity(intent)
+                                activity?.overridePendingTransition(R.anim.slide_in_up, R.anim.none)
+                                activity?.finishAfterTransition()
                             }
                         })
                     recyclerView.adapter = gameAdapter
