@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/black"/> <!-- 검은색 인디케이터 색상 -->
+    <corners android:radius="5dp"/> <!-- 반지름을 5dp로 설정하여 점 모양으로 만듬 -->
+    <size android:width="10dp" android:height="10dp"/>
+</shape>
