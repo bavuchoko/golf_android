@@ -27,7 +27,7 @@ import com.bavuchoko.jsparkgolf.vo.GameVo
 import com.bavuchoko.jsparkgolf.vo.ScoreVo
 import com.google.android.material.tabs.TabLayout
 
-class GameWaitingActivity : AppCompatActivity(), ScoringRoundFragment.ScoreUpdateListener  {
+class GameWaitingActivity : AppCompatActivity() {
 
     private lateinit var btnBack: Button
     private lateinit var gameViewModel: GameViewModel
@@ -99,23 +99,4 @@ class GameWaitingActivity : AppCompatActivity(), ScoringRoundFragment.ScoreUpdat
     }
 
 
-
-    override fun onScoreUpdated(scoreList: List<ScoreVo>) {
-        scoresForSave.clear()
-        scoresForSave.addAll(scoreList)
-        Log.d("GameViewActivity", "Scores for save: $scoresForSave")
-
-        checkIfStartbale()
-    }
-
-    private fun checkIfStartbale() {
-
-        if (statable) {
-            btnStart.setTextColor(getResources().getColor(R.color.blue))
-            Log.d("GameViewActivity", "다음 단계로 진행 가능합니다.")
-        } else {
-            btnStart.setTextColor(getResources().getColor(R.color.gray))
-            Log.d("GameViewActivity", "시작할 수 없습니다.")
-        }
-    }
 }

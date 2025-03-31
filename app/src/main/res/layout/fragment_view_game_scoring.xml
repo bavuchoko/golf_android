@@ -9,23 +9,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-16dp">
 
 
         <GridLayout
             android:id="@+id/scoreGrid"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:rowCount="2"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_gravity="center">
-
-
+            android:columnCount="2"
+            android:rowCount="2">
 
 
             <!-- 점수판 4개 (동적 생성 가능) -->
         </GridLayout>
+
+
+        <TextView
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="다음으로"
+            android:layout_marginRight="20dp"
+            android:textSize="15sp"
+            android:padding="4dp"
+            android:layout_gravity="end"
+            android:textColor="@color/gray"
+            />
 
     </LinearLayout>
 
