@@ -15,7 +15,7 @@ class GameViewModel(private val gameRepository: GameRepository): ViewModel() {
     val gameList: LiveData<List<GameVo>> get() = _gameList
     val gameView: LiveData<GameVo> get()= _gameVo
     var city: String? = null
-    var status: String ="OPEN"
+    var status: String ="PLAYING"
     var player: Boolean =true
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
