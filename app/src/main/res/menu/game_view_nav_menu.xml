@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/fragment_score_input"
+        android:title="입력하기"
+        android:icon="@drawable/filled_home"
+        android:background="@android:color/transparent"
+
+        />
+    <item
+        android:id="@+id/fragment_current_score"
+        android:title="현재점수"
+        android:icon="@drawable/filled_pin"
+        android:background="@android:color/transparent"
+       />
+    <item
+        android:id="@+id/fragment_total_score"
+        android:title="전체점수"
+        android:icon="@drawable/filled_trophy"
+        android:background="@android:color/transparent"
+        />
+
+</menu>
