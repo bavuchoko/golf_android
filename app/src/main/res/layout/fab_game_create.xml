@@ -58,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
             <ImageView
                 android:padding="4dp"
@@ -68,6 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/gray"
                 android:text="경기생성"/>
         </LinearLayout>
     </LinearLayout>
