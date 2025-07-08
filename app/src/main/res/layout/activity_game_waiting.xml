@@ -53,4 +53,18 @@
     </LinearLayout>
 
 
+    <GridLayout
+        android:id="@+id/playerGrid"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:columnCount="2"
+        android:rowCount="2">
+
+    </GridLayout>
+
+
+
+
 </LinearLayout>
