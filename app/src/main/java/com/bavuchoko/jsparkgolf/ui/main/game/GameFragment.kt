@@ -245,7 +245,6 @@ class GameFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("GameFragment", "onResume() 호출됨!")
         val region: String? = CommonMethod.getStoredValue(requireContext(), "region")
         gameViewModel.city=region
         updateMyPlaceButton(region)
@@ -258,6 +257,5 @@ class GameFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        Log.d("GameFragment", "onStart() 호출됨!")
     }
 }
